@@ -1,3 +1,4 @@
-xmltodict
+pandas
 rdflib
-rdflib-jsonld
+python-dotenv
+
