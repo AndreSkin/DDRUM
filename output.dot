@@ -1,0 +1,38 @@
+digraph { 
+ node [ fontname="DejaVu Sans" ] ; 
+	node3 -> node4 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node3 -> node5 [ color=BLACK, label=< <font point-size='10' color='#336633'>schema:study</font> > ] ;
+	node6 -> node1 [ color=BLACK, label=< <font point-size='10' color='#336633'>schema:study</font> > ] ;
+	node6 -> node7 [ color=BLACK, label=< <font point-size='10' color='#336633'>schema:url</font> > ] ;
+	node2 -> node8 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node6 -> node4 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node9 -> node2 [ color=BLACK, label=< <font point-size='10' color='#336633'>schema:study</font> > ] ;
+	node9 -> node10 [ color=BLACK, label=< <font point-size='10' color='#336633'>schema:url</font> > ] ;
+	node0 -> node8 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node1 -> node8 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node9 -> node4 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node5 -> node8 [ color=BLACK, label=< <font point-size='10' color='#336633'>rdf:type</font> > ] ;
+	node6 -> node0 [ color=BLACK, label=< <font point-size='10' color='#336633'>schema:study</font> > ] ;
+# https://clinicaltrials.gov/ct2/show/NCT00010075 node0
+node0 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women</B></td></tr><tr><td href='https://clinicaltrials.gov/ct2/show/NCT00010075' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://clinicaltrials.gov/ct2/show/NCT00010075</font></td></tr><tr><td align='left'>schema:MedicalCondition</td><td align='left'>&quot;Breast Cancer&quot;</td></tr></table> > ] 
+# https://clinicaltrials.gov/ct2/show/NCT00010088 node1
+node1 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>Study Of Gemcitabine, Leukovorin, And Fluorouracil Used To Treat Locally Advanced And Metastatic Pancreatic And Biliary Adenocarcinomas</B></td></tr><tr><td href='https://clinicaltrials.gov/ct2/show/NCT00010088' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://clinicaltrials.gov/ct2/show/NCT00010088</font></td></tr><tr><td align='left'>schema:MedicalCondition</td><td align='left'>&quot;Extrahepatic Bile Duct Cancer&quot;</td></tr></table> > ] 
+# https://clinicaltrials.gov/ct2/show/NCT00010023 node2
+node2 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System</B></td></tr><tr><td href='https://clinicaltrials.gov/ct2/show/NCT00010023' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://clinicaltrials.gov/ct2/show/NCT00010023</font></td></tr><tr><td align='left'>schema:MedicalCondition</td><td align='left'>&quot;Cancer&quot;</td></tr></table> > ] 
+# https://drugcentral.org/drugcard/1122 node3
+node3 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>exemestane</B></td></tr><tr><td href='https://drugcentral.org/drugcard/1122' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://drugcentral.org/drugcard/1122</font></td></tr><tr><td align='left'>schema:url</td><td align='left'>&quot;https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374&quot;</td></tr></table> > ] 
+# https://schema.org/Drug node4
+node4 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>Drug</B></td></tr><tr><td href='https://schema.org/Drug' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://schema.org/Drug</font></td></tr></table> > ] 
+# https://clinicaltrials.gov/ct2/show/NCT00010010 node5
+node5 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer</B></td></tr><tr><td href='https://clinicaltrials.gov/ct2/show/NCT00010010' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://clinicaltrials.gov/ct2/show/NCT00010010</font></td></tr><tr><td align='left'>schema:MedicalCondition</td><td align='left'>&quot;Breast Cancer&quot;</td></tr></table> > ] 
+# https://drugcentral.org/drugcard/26 node6
+node6 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>fluorouracil</B></td></tr><tr><td href='https://drugcentral.org/drugcard/26' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://drugcentral.org/drugcard/26</font></td></tr><tr><td align='left'>schema:url</td><td align='left'>&quot;https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185&quot;</td></tr></table> > ] 
+# https://www.ncbi.nlm.nih.gov/mesh/?term=D005472 node7
+node7 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>D005472</B></td></tr><tr><td href='https://www.ncbi.nlm.nih.gov/mesh/?term=D005472' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://www.ncbi.nlm.nih.gov/mesh/?term=D005472</font></td></tr></table> > ] 
+# https://schema.org/MedicalStudy node8
+node8 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>MedicalStudy</B></td></tr><tr><td href='https://schema.org/MedicalStudy' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://schema.org/MedicalStudy</font></td></tr></table> > ] 
+# https://drugcentral.org/drugcard/480 node9
+node9 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>capecitabine</B></td></tr><tr><td href='https://drugcentral.org/drugcard/480' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://drugcentral.org/drugcard/480</font></td></tr><tr><td align='left'>schema:url</td><td align='left'>&quot;https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1773&quot;</td></tr></table> > ] 
+# https://www.ncbi.nlm.nih.gov/mesh/?term=D000069287 node10
+node10 [ shape=none, color=black label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>D000069287</B></td></tr><tr><td href='https://www.ncbi.nlm.nih.gov/mesh/?term=D000069287' bgcolor='#eeeeee' colspan='2'><font point-size='10' color='#6666ff'>https://www.ncbi.nlm.nih.gov/mesh/?term=D000069287</font></td></tr></table> > ] 
+}
