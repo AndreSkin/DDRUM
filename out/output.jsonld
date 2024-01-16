@@ -8,66 +8,15 @@
     },
     "@graph": [
         {
-            "@id": "drug:4392",
-            "@type": "schema:Drug",
-            "http://www.w3.org/2000/01/rdf-schema#label": "cisplatin",
-            "schema:study": {
-                "@id": "file:NCT00010023"
-            },
-            "schema:url": {
-                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D002945"
-            }
-        },
-        {
-            "@id": "file:NCT00010010",
-            "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer",
-            "schema:MedicalCondition": "Breast Cancer"
-        },
-        {
             "@id": "drug:480",
             "@type": "schema:Drug",
             "http://www.w3.org/2000/01/rdf-schema#label": "capecitabine",
-            "schema:study": {
-                "@id": "file:NCT00010023"
-            },
             "schema:url": [
                 "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1773",
                 {
                     "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D000069287"
                 }
             ]
-        },
-        {
-            "@id": "drug:26",
-            "@type": "schema:Drug",
-            "http://www.w3.org/2000/01/rdf-schema#label": "fluorouracil",
-            "schema:study": [
-                {
-                    "@id": "file:NCT00010075"
-                },
-                {
-                    "@id": "file:NCT00010088"
-                }
-            ],
-            "schema:url": [
-                "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185",
-                {
-                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D005472"
-                }
-            ]
-        },
-        {
-            "@id": "file:NCT00010088",
-            "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "Study Of Gemcitabine, Leukovorin, And Fluorouracil Used To Treat Locally Advanced And Metastatic Pancreatic And Biliary Adenocarcinomas",
-            "schema:MedicalCondition": "Extrahepatic Bile Duct Cancer"
-        },
-        {
-            "@id": "file:NCT00010023",
-            "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System",
-            "schema:MedicalCondition": "Cancer"
         },
         {
             "@id": "drug:1122",
@@ -77,6 +26,60 @@
                 "@id": "file:NCT00010010"
             },
             "schema:url": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374"
+        },
+        {
+            "@id": "file:NCT00010010",
+            "@type": "schema:MedicalStudy",
+            "http://www.w3.org/2000/01/rdf-schema#label": "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer",
+            "schema:MedicalCondition": "Breast Cancer",
+            "schema:about": {
+                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
+            }
+        },
+        {
+            "@id": "file:NCT00010023",
+            "@type": "schema:MedicalStudy",
+            "http://www.w3.org/2000/01/rdf-schema#label": "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System",
+            "schema:MedicalCondition": "Cancer"
+        },
+        {
+            "@id": "file:NCT00010088",
+            "@type": "schema:MedicalStudy",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Study Of Gemcitabine, Leukovorin, And Fluorouracil Used To Treat Locally Advanced And Metastatic Pancreatic And Biliary Adenocarcinomas",
+            "schema:MedicalCondition": "Extrahepatic Bile Duct Cancer",
+            "schema:about": [
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Pancreatic%20Neoplasms%5BMeSH%20Terms%5D"
+                },
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D"
+                },
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Cholangiocarcinoma%5BMeSH%20Terms%5D"
+                }
+            ]
+        },
+        {
+            "@id": "drug:26",
+            "@type": "schema:Drug",
+            "http://www.w3.org/2000/01/rdf-schema#label": "fluorouracil",
+            "schema:study": {
+                "@id": "file:NCT00010088"
+            },
+            "schema:url": [
+                "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185",
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D005472"
+                }
+            ]
+        },
+        {
+            "@id": "drug:4392",
+            "@type": "schema:Drug",
+            "http://www.w3.org/2000/01/rdf-schema#label": "cisplatin",
+            "schema:url": {
+                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D002945"
+            }
         },
         {
             "@id": "file:NCT00010075",
