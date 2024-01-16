@@ -30,22 +30,23 @@
         {
             "@id": "file:NCT00010010",
             "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer",
             "schema:MedicalCondition": "Breast Cancer",
             "schema:about": {
                 "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
-            }
+            },
+            "schema:alternateName": "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer",
+            "schema:title": "Exemestane Plus Goserelin in Treating Premenopausal Women With Metastatic Breast Cancer"
         },
         {
             "@id": "file:NCT00010023",
             "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System",
-            "schema:MedicalCondition": "Cancer"
+            "schema:MedicalCondition": "Cancer",
+            "schema:alternateName": "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System",
+            "schema:title": "Capecitabine Combined With Cisplatin in Treating Patients With Locally Advanced or Metastatic Solid Tumors"
         },
         {
             "@id": "file:NCT00010088",
             "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "Study Of Gemcitabine, Leukovorin, And Fluorouracil Used To Treat Locally Advanced And Metastatic Pancreatic And Biliary Adenocarcinomas",
             "schema:MedicalCondition": "Extrahepatic Bile Duct Cancer",
             "schema:about": [
                 {
@@ -57,7 +58,9 @@
                 {
                     "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Cholangiocarcinoma%5BMeSH%20Terms%5D"
                 }
-            ]
+            ],
+            "schema:alternateName": "Study Of Gemcitabine, Leukovorin, And Fluorouracil Used To Treat Locally Advanced And Metastatic Pancreatic And Biliary Adenocarcinomas",
+            "schema:title": "Chemotherapy in Treating Patients With Locally Advanced or Metastatic Cancer of the Pancreas or Bile Duct"
         },
         {
             "@id": "drug:26",
@@ -84,8 +87,9 @@
         {
             "@id": "file:NCT00010075",
             "@type": "schema:MedicalStudy",
-            "http://www.w3.org/2000/01/rdf-schema#label": "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women",
-            "schema:MedicalCondition": "Breast Cancer"
+            "schema:MedicalCondition": "Breast Cancer",
+            "schema:alternateName": "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women",
+            "schema:title": "Combination Chemotherapy in Treating Older Women With Metastatic Breast Cancer"
         }
     ]
 }
