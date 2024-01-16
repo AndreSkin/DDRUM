@@ -8,9 +8,56 @@
     },
     "@graph": [
         {
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D",
+            "schema:about": {
+                "@id": "file:NCT00010088"
+            }
+        },
+        {
+            "@id": "file:NCT00010075",
+            "@type": "schema:MedicalStudy",
+            "schema:MedicalCondition": "Breast Cancer",
+            "schema:about": [
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
+                },
+                {
+                    "@id": "drug:26"
+                }
+            ],
+            "schema:alternateName": "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women",
+            "schema:title": "Combination Chemotherapy in Treating Older Women With Metastatic Breast Cancer"
+        },
+        {
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D",
+            "schema:about": [
+                {
+                    "@id": "file:NCT00010010"
+                },
+                {
+                    "@id": "file:NCT00010075"
+                }
+            ]
+        },
+        {
+            "@id": "file:NCT00010010",
+            "@type": "schema:MedicalStudy",
+            "schema:MedicalCondition": "Breast Cancer",
+            "schema:about": [
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
+                },
+                {
+                    "@id": "drug:1122"
+                }
+            ],
+            "schema:alternateName": "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer",
+            "schema:title": "Exemestane Plus Goserelin in Treating Premenopausal Women With Metastatic Breast Cancer"
+        },
+        {
             "@id": "drug:480",
             "@type": "schema:Drug",
-            "http://www.w3.org/2000/01/rdf-schema#label": "capecitabine",
+            "schema:name": "capecitabine",
             "schema:url": [
                 "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1773",
                 {
@@ -19,23 +66,12 @@
             ]
         },
         {
-            "@id": "drug:1122",
+            "@id": "drug:4392",
             "@type": "schema:Drug",
-            "http://www.w3.org/2000/01/rdf-schema#label": "exemestane",
-            "schema:study": {
-                "@id": "file:NCT00010010"
-            },
-            "schema:url": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374"
-        },
-        {
-            "@id": "file:NCT00010010",
-            "@type": "schema:MedicalStudy",
-            "schema:MedicalCondition": "Breast Cancer",
-            "schema:about": {
-                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
-            },
-            "schema:alternateName": "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer",
-            "schema:title": "Exemestane Plus Goserelin in Treating Premenopausal Women With Metastatic Breast Cancer"
+            "schema:name": "cisplatin",
+            "schema:url": {
+                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D002945"
+            }
         },
         {
             "@id": "file:NCT00010023",
@@ -53,6 +89,9 @@
                     "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Pancreatic%20Neoplasms%5BMeSH%20Terms%5D"
                 },
                 {
+                    "@id": "drug:26"
+                },
+                {
                     "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D"
                 },
                 {
@@ -65,10 +104,15 @@
         {
             "@id": "drug:26",
             "@type": "schema:Drug",
-            "http://www.w3.org/2000/01/rdf-schema#label": "fluorouracil",
-            "schema:study": {
-                "@id": "file:NCT00010088"
-            },
+            "schema:name": "fluorouracil",
+            "schema:study": [
+                {
+                    "@id": "file:NCT00010075"
+                },
+                {
+                    "@id": "file:NCT00010088"
+                }
+            ],
             "schema:url": [
                 "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185",
                 {
@@ -77,19 +121,25 @@
             ]
         },
         {
-            "@id": "drug:4392",
-            "@type": "schema:Drug",
-            "http://www.w3.org/2000/01/rdf-schema#label": "cisplatin",
-            "schema:url": {
-                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D002945"
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Cholangiocarcinoma%5BMeSH%20Terms%5D",
+            "schema:about": {
+                "@id": "file:NCT00010088"
             }
         },
         {
-            "@id": "file:NCT00010075",
-            "@type": "schema:MedicalStudy",
-            "schema:MedicalCondition": "Breast Cancer",
-            "schema:alternateName": "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women",
-            "schema:title": "Combination Chemotherapy in Treating Older Women With Metastatic Breast Cancer"
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Pancreatic%20Neoplasms%5BMeSH%20Terms%5D",
+            "schema:about": {
+                "@id": "file:NCT00010088"
+            }
+        },
+        {
+            "@id": "drug:1122",
+            "@type": "schema:Drug",
+            "schema:name": "exemestane",
+            "schema:study": {
+                "@id": "file:NCT00010010"
+            },
+            "schema:url": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374"
         }
     ]
 }
