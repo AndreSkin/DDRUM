@@ -36,14 +36,16 @@
     });
 
     function executeQueries(conditionName, drugName) {
+      console.log(conditionName);
       if(conditionName === undefined){
         conditionName = "";
       }
-      else conditionName.toLowerCase();
+      else conditionName = conditionName.toLowerCase();
       if(drugName === undefined){
         drugName = "";
       }
-      else drugName.toLowerCase();
+      else drugName = drugName.toLowerCase();
+      console.log(conditionName);
 
       if (conditionName !== "") {
         queryAndDisplayResult(1, `Which drugs have most frequently been used in ${conditionName}?`, conditionName);
