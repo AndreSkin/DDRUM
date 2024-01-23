@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interfaccia SPARQL</title>
+</head>
+<body>
+  <label for="malattiaInput">Inserisci il nome della malattia:</label>
+  <input type="text" id="malattiaInput">
+  <button onclick="eseguiQuery()">Cerca Medicine</button>
+
+  <div id="risultatiQuery">
+    <h2>Risultati della Query</h2>
+    <table id="risultatiTable">
+      <thead>
+        <tr>
+          <th>Medicina</th>
+        </tr>
+      </thead>
+      <tbody id="risultatiBody">
+        <!-- I risultati della query saranno inseriti qui -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function eseguiQuery() {
+      const malattia = document.getElementById('malattiaInput').value;
+
+      // Costruisci la query SPARQL con il nome della malattia
+      const query = `
+        PREFIX schema: <https://schema.org/>
+
+        SELECT ?drug
+        WHERE {
+          ?condition schema:citedby ?study .
+          ?study schema:MedicalCondition "${malattia}" .
+          ?drug schema:study ?study .
+        }`;
+
+      inviaQueryAlServer(query);
+    }
+
+    function inviaQueryAlServer(query) {
+      fetch('http://localhost:3030/DDRUM/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `query=${encodeURIComponent(query)}`,
+      })
+      .then(response => response.json())
+      .then(data => visualizzaRisultati(data));
+    }
+
+    function visualizzaRisultati(data) {
+      const risultatiTable = document.getElementById('risultatiTable');
+      const risultatiBody = document.getElementById('risultatiBody');
+
+      // Pulisci la tabella prima di inserire nuovi dati
+      risultatiBody.innerHTML = '';
+
+      // Verifica se ci sono risultati
+      if (data.results.bindings.length === 0) {
+        risultatiBody.innerHTML = '<tr><td colspan="1">Nessun risultato trovato.</td></tr>';
+      } else {
+        // Itera sui risultati e crea le righe della tabella
+        data.results.bindings.forEach(result => {
+          const drugName = result.drug.value;
+
+          const row = document.createElement('tr');
+          const cell = document.createElement('td');
+          cell.textContent = drugName;
+          row.appendChild(cell);
+
+          risultatiBody.appendChild(row);
+        });
+      }
+    }
+  </script>
+</body>
+</html>

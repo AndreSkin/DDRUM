@@ -1,0 +1,69 @@
+@prefix drug: <https://drugcentral.org/drugcard/> .
+@prefix file: <https://clinicaltrials.gov/ct2/show/> .
+@prefix mesh: <https://www.ncbi.nlm.nih.gov/mesh/?term=> .
+@prefix schema: <https://schema.org/> .
+
+drug:4392 a schema:Drug ;
+    schema:name "cisplatin" ;
+    schema:study file:NCT00010023 ;
+    schema:url mesh:D002945 .
+
+drug:480 a schema:Drug ;
+    schema:name "capecitabine" ;
+    schema:study file:NCT00010023 ;
+    schema:url mesh:D000069287,
+        "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1773" .
+
+drug:1122 a schema:Drug ;
+    schema:name "exemestane" ;
+    schema:study file:NCT00010010 ;
+    schema:url "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374" .
+
+mesh:Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D schema:citedby file:NCT00010088 .
+
+mesh:Cholangiocarcinoma%5BMeSH%20Terms%5D schema:citedby file:NCT00010088 .
+
+mesh:Pancreatic%20Neoplasms%5BMeSH%20Terms%5D schema:citedby file:NCT00010088 .
+
+file:NCT00010010 a schema:MedicalStudy ;
+    schema:MedicalCondition "Breast Cancer" ;
+    schema:about drug:1122,
+        mesh:Breast%20Neoplasms%5BMeSH%20Terms%5D ;
+    schema:alternateName "A Phase II Study of the Combination of Exemestane and Goserelin in Premenopausal Women With Metastatic Hormone Receptor Positive Breast Cancer" ;
+    schema:phase "Phase 2" ;
+    schema:title "Exemestane Plus Goserelin in Treating Premenopausal Women With Metastatic Breast Cancer" .
+
+file:NCT00010023 a schema:MedicalStudy ;
+    schema:MedicalCondition "Cancer" ;
+    schema:alternateName "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System" ;
+    schema:phase "Phase 1" ;
+    schema:title "Capecitabine Combined With Cisplatin in Treating Patients With Locally Advanced or Metastatic Solid Tumors" .
+
+file:NCT00010075 a schema:MedicalStudy ;
+    schema:MedicalCondition "Breast Cancer" ;
+    schema:about drug:26,
+        mesh:Breast%20Neoplasms%5BMeSH%20Terms%5D ;
+    schema:alternateName "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women" ;
+    schema:phase "Phase 2" ;
+    schema:title "Combination Chemotherapy in Treating Older Women With Metastatic Breast Cancer" .
+
+drug:26 a schema:Drug ;
+    schema:name "fluorouracil" ;
+    schema:study file:NCT00010075,
+        file:NCT00010088 ;
+    schema:url mesh:D005472,
+        "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185" .
+
+mesh:Breast%20Neoplasms%5BMeSH%20Terms%5D schema:citedby file:NCT00010010,
+        file:NCT00010075 .
+
+file:NCT00010088 a schema:MedicalStudy ;
+    schema:MedicalCondition "Extrahepatic Bile Duct Cancer" ;
+    schema:about drug:26,
+        mesh:Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D,
+        mesh:Cholangiocarcinoma%5BMeSH%20Terms%5D,
+        mesh:Pancreatic%20Neoplasms%5BMeSH%20Terms%5D ;
+    schema:alternateName "Study Of Gemcitabine, Leukovorin, And Fluorouracil Used To Treat Locally Advanced And Metastatic Pancreatic And Biliary Adenocarcinomas" ;
+    schema:phase "Phase 2" ;
+    schema:title "Chemotherapy in Treating Patients With Locally Advanced or Metastatic Cancer of the Pancreas or Bile Duct" .
+

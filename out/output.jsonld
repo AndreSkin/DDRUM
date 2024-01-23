@@ -8,6 +8,33 @@
     },
     "@graph": [
         {
+            "@id": "drug:26",
+            "@type": "schema:Drug",
+            "schema:name": "fluorouracil",
+            "schema:study": [
+                {
+                    "@id": "file:NCT00010088"
+                },
+                {
+                    "@id": "file:NCT00010075"
+                }
+            ],
+            "schema:url": [
+                "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185",
+                {
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D005472"
+                }
+            ]
+        },
+        {
+            "@id": "file:NCT00010023",
+            "@type": "schema:MedicalStudy",
+            "schema:MedicalCondition": "Cancer",
+            "schema:alternateName": "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System",
+            "schema:phase": "Phase 1",
+            "schema:title": "Capecitabine Combined With Cisplatin in Treating Patients With Locally Advanced or Metastatic Solid Tumors"
+        },
+        {
             "@id": "drug:480",
             "@type": "schema:Drug",
             "schema:name": "capecitabine",
@@ -22,6 +49,12 @@
             ]
         },
         {
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Cholangiocarcinoma%5BMeSH%20Terms%5D",
+            "schema:citedby": {
+                "@id": "file:NCT00010088"
+            }
+        },
+        {
             "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D",
             "schema:citedby": [
                 {
@@ -31,26 +64,6 @@
                     "@id": "file:NCT00010010"
                 }
             ]
-        },
-        {
-            "@id": "drug:4392",
-            "@type": "schema:Drug",
-            "schema:name": "cisplatin",
-            "schema:study": {
-                "@id": "file:NCT00010023"
-            },
-            "schema:url": {
-                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D002945"
-            }
-        },
-        {
-            "@id": "drug:1122",
-            "@type": "schema:Drug",
-            "schema:name": "exemestane",
-            "schema:study": {
-                "@id": "file:NCT00010010"
-            },
-            "schema:url": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374"
         },
         {
             "@id": "file:NCT00010010",
@@ -69,23 +82,41 @@
             "schema:title": "Exemestane Plus Goserelin in Treating Premenopausal Women With Metastatic Breast Cancer"
         },
         {
-            "@id": "drug:26",
-            "@type": "schema:Drug",
-            "schema:name": "fluorouracil",
-            "schema:study": [
+            "@id": "file:NCT00010075",
+            "@type": "schema:MedicalStudy",
+            "schema:MedicalCondition": "Breast Cancer",
+            "schema:about": [
                 {
-                    "@id": "file:NCT00010088"
+                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
                 },
                 {
-                    "@id": "file:NCT00010075"
+                    "@id": "drug:26"
                 }
             ],
-            "schema:url": [
-                "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL185",
-                {
-                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D005472"
-                }
-            ]
+            "schema:alternateName": "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women",
+            "schema:phase": "Phase 2",
+            "schema:title": "Combination Chemotherapy in Treating Older Women With Metastatic Breast Cancer"
+        },
+        {
+            "@id": "drug:1122",
+            "@type": "schema:Drug",
+            "schema:name": "exemestane",
+            "schema:study": {
+                "@id": "file:NCT00010010"
+            },
+            "schema:url": "https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL1200374"
+        },
+        {
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Pancreatic%20Neoplasms%5BMeSH%20Terms%5D",
+            "schema:citedby": {
+                "@id": "file:NCT00010088"
+            }
+        },
+        {
+            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D",
+            "schema:citedby": {
+                "@id": "file:NCT00010088"
+            }
         },
         {
             "@id": "file:NCT00010088",
@@ -110,46 +141,15 @@
             "schema:title": "Chemotherapy in Treating Patients With Locally Advanced or Metastatic Cancer of the Pancreas or Bile Duct"
         },
         {
-            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Pancreatic%20Neoplasms%5BMeSH%20Terms%5D",
-            "schema:citedby": {
-                "@id": "file:NCT00010088"
+            "@id": "drug:4392",
+            "@type": "schema:Drug",
+            "schema:name": "cisplatin",
+            "schema:study": {
+                "@id": "file:NCT00010023"
+            },
+            "schema:url": {
+                "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=D002945"
             }
-        },
-        {
-            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Cholangiocarcinoma%5BMeSH%20Terms%5D",
-            "schema:citedby": {
-                "@id": "file:NCT00010088"
-            }
-        },
-        {
-            "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Bile%20Duct%20Neoplasms%5BMeSH%20Terms%5D",
-            "schema:citedby": {
-                "@id": "file:NCT00010088"
-            }
-        },
-        {
-            "@id": "file:NCT00010023",
-            "@type": "schema:MedicalStudy",
-            "schema:MedicalCondition": "Cancer",
-            "schema:alternateName": "A Phase I Study of Oral Fluoropyrimidine Capecitabine (Xeloda Roche) Combined With Intravenous Cisplatin in Patients With Advanced Cancer of the Digestive System",
-            "schema:phase": "Phase 1",
-            "schema:title": "Capecitabine Combined With Cisplatin in Treating Patients With Locally Advanced or Metastatic Solid Tumors"
-        },
-        {
-            "@id": "file:NCT00010075",
-            "@type": "schema:MedicalStudy",
-            "schema:MedicalCondition": "Breast Cancer",
-            "schema:about": [
-                {
-                    "@id": "https://www.ncbi.nlm.nih.gov/mesh/?term=Breast%20Neoplasms%5BMeSH%20Terms%5D"
-                },
-                {
-                    "@id": "drug:26"
-                }
-            ],
-            "schema:alternateName": "Study Of The Survival Without Degradation To The Quality Of Life During Chemotherapy For Metastatic Breast Cancer In Women",
-            "schema:phase": "Phase 2",
-            "schema:title": "Combination Chemotherapy in Treating Older Women With Metastatic Breast Cancer"
         }
     ]
 }
