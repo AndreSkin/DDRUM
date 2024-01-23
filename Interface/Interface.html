@@ -3,81 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interfaccia SPARQL</title>
+  <title>DDRUM</title>
 </head>
 <body>
-  <label for="malattiaInput">Inserisci il nome della malattia:</label>
-  <input type="text" id="malattiaInput">
-  <button onclick="eseguiQuery()">Cerca Medicine</button>
+  <h2>DDRUM</h2>
 
-  <div id="risultatiQuery">
-    <h2>Risultati della Query</h2>
-    <table id="risultatiTable">
-      <thead>
-        <tr>
-          <th>Medicina</th>
-        </tr>
-      </thead>
-      <tbody id="risultatiBody">
-        <!-- I risultati della query saranno inseriti qui -->
-      </tbody>
-    </table>
-  </div>
+  <!-- Form for user input -->
+  <form id="conditionForm">
+    <label for="conditionInput">Enter the name of the medical condition:</label>
+    <input type="text" id="conditionInput" placeholder="eg: Cancer">
+  </form>
+
+  <form id="drugForm">
+    <label for="drugInput">Enter the name of the drug:</label>
+    <input type="text" id="drugInput" placeholder="eg: fluorouracil">
+  </form>
+
+  <button type="submit" id="submitbutton">Submit</button>
+
+  <div id="result1"></div>
+  <div id="result2"></div>
+  <div id="result3"></div>
+  <div id="result4"></div>
 
   <script>
-    function eseguiQuery() {
-      const malattia = document.getElementById('malattiaInput').value;
+    // Event listener for form submission
+    document.getElementById('submitbutton').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevents the form from submitting in the traditional way
+      let conditionName = document.getElementById('conditionInput').value;
+      let drugName = document.getElementById('drugInput').value;
+      executeQueries(conditionName,drugName);
+    });
 
-      // Costruisci la query SPARQL con il nome della malattia
-      const query = `
-        PREFIX schema: <https://schema.org/>
+    function executeQueries(conditionName, drugName) {
+      if(conditionName === undefined){
+        conditionName = "";
+      }
+      else conditionName.toLowerCase();
+      if(drugName === undefined){
+        drugName = "";
+      }
+      else drugName.toLowerCase();
 
-        SELECT ?drug
-        WHERE {
-          ?condition schema:citedby ?study .
-          ?study schema:MedicalCondition "${malattia}" .
-          ?drug schema:study ?study .
-        }`;
-
-      inviaQueryAlServer(query);
+      if (conditionName !== "") {
+        queryAndDisplayResult(1, `Which drugs have most frequently been used in ${conditionName}?`, conditionName);
+        queryAndDisplayResult(4, `How many phase 1-2-3 studies are there for ${conditionName}`, conditionName);
+      }
+      if (drugName !== "") {
+        queryAndDisplayResult(2, `What conditions has ${drugName} been used for`, conditionName, drugName);
+      }
+      queryAndDisplayResult(3, `The most frequently used or tested drug is`);
+      
     }
 
-    function inviaQueryAlServer(query) {
-      fetch('http://localhost:3030/DDRUM/query', {
+    function queryAndDisplayResult(queryNumber, queryDescription, conditionName = "", drugName = "") {
+      const endpoint = 'http://localhost:3030/DDRUM/query';
+      const resultElement = document.getElementById(`result${queryNumber}`);
+
+      const queries = [
+        // Which drugs have most frequently been used in ${conditionName}?
+        `
+        PREFIX schema: <https://schema.org/>
+
+        SELECT ?drug (COUNT(?study) as ?studyCount)
+        WHERE {
+          ?study schema:MedicalCondition "${conditionName}" .
+          ?drug schema:study ?study .
+        }
+        GROUP BY ?drug
+        ORDER BY DESC(?studyCount)
+        LIMIT 1
+        `,
+        // What conditions has ${drugName} been used for
+        `
+        PREFIX schema: <https://schema.org/>
+
+        SELECT ?condition
+        WHERE {
+          ?drug schema:name "${drugName}" .
+          ?drug schema:study ?study .
+          ?study schema:MedicalCondition ?condition .
+        }
+        `,
+        // The most frequently used or tested drug is
+        `
+        PREFIX schema: <https://schema.org/>
+
+        SELECT ?drugName ?drug (COUNT(?study) as ?studyCount)
+        WHERE {
+          ?drug schema:study ?study .
+          ?drug schema:name ?drugName .
+        }
+        GROUP BY ?drug ?drugName
+        ORDER BY DESC(?studyCount)
+        LIMIT 1
+        `,
+        // How many phase 1-2-3 studies are there for ${conditionName}
+        `
+        PREFIX schema: <https://schema.org/>
+
+        SELECT ?phase (COUNT(?study) as ?studyCount)
+        WHERE {
+          ?study schema:phase ?phase .
+          ?study schema:MedicalCondition "${conditionName}" .
+        }
+        GROUP BY ?phase
+        `
+      ];
+
+      fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `query=${encodeURIComponent(query)}`,
+        body: `query=${encodeURIComponent(queries[queryNumber - 1])}`,
       })
       .then(response => response.json())
-      .then(data => visualizzaRisultati(data));
+      .then(data => displayResult(data, resultElement, queryDescription));
     }
 
-    function visualizzaRisultati(data) {
-      const risultatiTable = document.getElementById('risultatiTable');
-      const risultatiBody = document.getElementById('risultatiBody');
+    function displayResult(data, resultElement, queryDescription) {
+      resultElement.innerHTML = `<h3>${queryDescription}</h3>`;
 
-      // Pulisci la tabella prima di inserire nuovi dati
-      risultatiBody.innerHTML = '';
-
-      // Verifica se ci sono risultati
       if (data.results.bindings.length === 0) {
-        risultatiBody.innerHTML = '<tr><td colspan="1">Nessun risultato trovato.</td></tr>';
+        resultElement.innerHTML += '<p>No results found.</p>';
       } else {
-        // Itera sui risultati e crea le righe della tabella
         data.results.bindings.forEach(result => {
-          const drugName = result.drug.value;
-
-          const row = document.createElement('tr');
-          const cell = document.createElement('td');
-          cell.textContent = drugName;
-          row.appendChild(cell);
-
-          risultatiBody.appendChild(row);
+          for (const key in result) {
+            resultElement.innerHTML += `<p><strong>${key}:</strong> ${result[key].value}</p>`;
+          }
         });
       }
     }
+
+    // Initial execution with an empty condition
+    executeQueries("");
   </script>
 </body>
 </html>
