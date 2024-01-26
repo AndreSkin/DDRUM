@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Simple Form</h1>
+    <form id="myForm">
+        <label for="input_data">Input Data:</label>
+        <input type="text" id="input_data" name="input_data" required>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function submitForm() {
+            var inputData = $('#input_data').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/submit',
+                data: { 'input_data': inputData },
+                success: function (response) {
+                    $('#result').html('Data received: ' + response.result);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
