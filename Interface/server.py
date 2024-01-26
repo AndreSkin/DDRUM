@@ -12,7 +12,6 @@ def index():
 def submit():
     data = request.form['input_data']
 
-    # Assuming data is the query you want to send
     query = """
         PREFIX schema: <https://schema.org/>
 
