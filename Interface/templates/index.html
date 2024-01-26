@@ -3,42 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>DDRUM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Simple Form</h1>
-    <form id="myForm">
-        <label for="input_data">Input Data:</label>
-        <input type="text" id="input_data" name="input_data" required>
-        <button type="button" onclick="submitForm()">Submit</button>
-    </form>
+<body class="d-flex align-items-center justify-content-center vh-100">
+    <div class="container">
+        <h1 class="text-center mb-4">DDRUM</h1>
 
-    <div id="result"></div>
+        <div class="form-group">
+            <label for="dropdownMenu">Select a Form:</label>
+            <select class="form-control" id="dropdownMenu">
+                <option value="1">Most used drugs to treat a condition</option>
+                <option value="2">Drugs used to treat given condition</option>
+                <option value="3">Studies (divided by phase) in which a drug is cited</option>
+                <option value="4">Studies (divided by phase) in which a condition is cited</option>
+                <option value="5">All studies citing a drug</option>
+                <option value="6">All studies citing a condition</option>
+            </select>
+        </div>
+
+        <!-- Form 1 -->
+        <div class="form-container" id="form1" name="Mdrug_cond">
+            <div class="form-group">
+                <label for="condition1">Which drugs are the most used for</label>
+                <input type="text" class="form-control" id="condition1" placeholder="Enter Condition e.g. Cancer" required>
+            </div>
+        </div>
+
+        <!-- Form 2 -->
+        <div class="form-container" id="form2" name="drug_cond" style="display: none;">
+            <div class="form-group">
+                <label for="condition2">Which drugs are used to treat </label>
+                <input type="text" class="form-control" id="condition2" placeholder="Enter Condition e.g. Cancer" required>
+            </div>
+        </div>
+
+        <!-- Form 3 -->
+        <div class="form-container" id="form3" name="Pstud_drug" style="display: none;">
+            <div class="form-group">
+                <label for="drug1">Which are the studies (divided by phase) which cite</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="drug1" placeholder="Enter Drug name e.g. Paracetamol" required>
+                    <div class="input-group-append">
+                        <select class="custom-select" id="phaseDropdown_d1">
+                            <option value="Phase 1">Phase 1</option>
+                            <option value="Phase 2">Phase 2</option>
+                            <option value="Phase 3">Phase 3</option>
+                            <option value="Phase1/Phase2">Phase 1/Phase 2</option>
+                            <option value="Phase2/Phase3">Phase 2/Phase 3</option>
+                            <option value="Phase 4">Phase 4</option>
+                            <option value="E_Phase 1">Early Phase 1</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form 4 -->
+        <div class="form-container" id="form4" name="Pstud_cond" style="display: none;">
+            <div class="form-group" >
+                <label for="condition3">Which are the studies (divided by phase) which cite</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="condition3" placeholder="Enter Condition e.g. Cancer" required>
+                    <div class="input-group-append">
+                        <select class="custom-select" id="phaseDropdown_c1">
+                            <option value="Phase 1">Phase 1</option>
+                            <option value="Phase 2">Phase 2</option>
+                            <option value="Phase 3">Phase 3</option>
+                            <option value="Phase1/Phase2">Phase 1/Phase 2</option>
+                            <option value="Phase2/Phase3">Phase 2/Phase 3</option>
+                            <option value="Phase 4">Phase 4</option>
+                            <option value="E_Phase 1">Early Phase 1</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form 4 -->
+        <div class="form-container" id="form5" name="stud_drug" style="display: none;">
+            <div class="form-group">
+                <label for="drug2">All the studies which cite (drug)</label>
+                <input type="text" class="form-control" id="drug2" placeholder="Enter Drug name e.g. Paracetamol" required>
+            </div>
+        </div>
+
+        <!-- Form 5 -->
+        <div class="form-container" id="form6" name="stud_cond" style="display: none;">
+            <div class="form-group">
+                <label for="condition4">All the studies which cite (condition)</label>
+                <input type="text" class="form-control" id="condition4" placeholder="Enter Condition e.g. Cancer" required>
+            </div>
+        </div>
+
+        <div class="num_res" id="form_num">
+            <div class="form-group">
+                <label for="num_res">Maximum number of results to display:</label>
+                <input type="number" class="form-control" id="num_res" placeholder="Max results" required>
+            </div>
+        </div>
+
+        <!-- Global Submission Button -->
+        <button type="button" class="btn btn-primary" onclick="submitForms()">Submit</button>
+
+        <div id="error"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="front.js"></script>
+    <script src="requests.js"></script>
 
     <script>
-        function submitForm() {
-            var inputData = $('#input_data').val();
+        $(document).ready(function() {
+            // Set the default value for the dropdown
+            $("#dropdownMenu").val("1");
+            $("#num_res").val("10");
 
-            $.ajax({
-                type: 'POST',
-                url: '/submit',
-                data: { 'input_data': inputData },
-                success: function (response) {
-                    var drugName = response.results.bindings[0].drugName.value;
-                    var drugURL = response.results.bindings[0].drug.value;
-                    var studyCount = response.results.bindings[0].studyCount.value;
+            // Call the function to show the corresponding form on page load
+            showSelectedForm();
 
-                    // Update the HTML with the received data
-                    $('#result').html(`
-                        <strong>Drug Name:</strong> ${drugName}<br>
-                        <strong>Drug URL:</strong> <a href="${drugURL}" target="_blank">${drugURL}</a><br>
-                        <strong>Study Count:</strong> ${studyCount}
-                    `);
-                }
+            // Attach an event listener to the dropdown to show the corresponding form on change
+            $("#dropdownMenu").change(function() {
+                showSelectedForm();
             });
 
-        }
+            // Function to show the corresponding form based on the selected dropdown value
+            function showSelectedForm() {
+                // Hide all forms
+                $(".form-container").hide();
+
+                // Get the selected value from the dropdown
+                var selectedValue = $("#dropdownMenu").val();
+
+                // Show the corresponding form
+                $("#form" + selectedValue).show();
+            }
+        });
     </script>
+    
 </body>
 </html>
