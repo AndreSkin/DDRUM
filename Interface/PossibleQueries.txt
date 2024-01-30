@@ -1,0 +1,30 @@
+Retrieve all drugs used in a specific clinical trial.
+
+Get information about a specific drug, including its name, study, and URL.
+
+Find all clinical trials related to a specific medical condition.
+Retrieve the phase of a clinical trial for a specific medical study.
+
+List all drugs cited by a specific medical study.
+
+Find all clinical trials citing a specific medical condition.
+
+Retrieve all drugs associated with a specific medical condition.
+
+Get the URL of a specific drug.
+
+Find all clinical trials associated with a specific drug.
+
+List all medical studies associated with a specific drug.
+
+Retrieve information about a specific clinical trial, including its title, medical condition, and phase.
+
+Get the URL of a specific clinical trial.
+
+Find all drugs cited by multiple medical studies.
+
+Retrieve all clinical trials related to a specific drug.
+
+List all medical conditions associated with a specific drug.
+
+Find all clinical trials associated with a specific medical condition and drug combination.
