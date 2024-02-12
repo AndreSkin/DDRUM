@@ -9,8 +9,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-from flask import request, jsonify
-import requests
 
 @app.route('/submit', methods=['POST'])
 def submit():
