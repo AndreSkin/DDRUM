@@ -1,4 +1,7 @@
 import logging
+    # app.logger.warning('testing warning log')
+    # app.logger.error('testing error log')
+    # app.logger.info('testing info log')
 from flask import Flask, render_template, request, jsonify
 import requests
 import json
@@ -13,8 +16,10 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
+
+
         # Extract data from the request
-        data = request.form['input_data']
+        data = request.data
         args = json.loads(data)
 
         sparql_query = queryBuilder(args)
