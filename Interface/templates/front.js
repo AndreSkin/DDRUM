@@ -1,6 +1,5 @@
-// Function to submit all forms and log the data in JSON
 function submitForms() {
-   var formData = {}
+    var formData = {};
 
     // Get the selected form
     var selectedFormId = $("#dropdownMenu").val();
@@ -30,4 +29,26 @@ function submitForms() {
 
     // Log the data in JSON format
     console.log(JSON.stringify(formData));
+
+    // Send data as a POST request
+    fetch('http://localhost:8000/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response:', data);
+        // Handle response as needed
+    })
+    .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+    });
 }

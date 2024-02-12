@@ -66,8 +66,6 @@ def queryBuilder(args):
             ORDER BY DESC(?studyCount)
             LIMIT {num_results}
         """
-        return query
-
     elif query_type == 'drug_cond':
         condition = args.get('condition2')
         num_results = args.get('num_res')
@@ -80,8 +78,6 @@ def queryBuilder(args):
             }}
             LIMIT {num_results}
         """
-        return query
-
     elif query_type == 'Pstud_drug':
         phase = args.get('phase')
         drug = args.get('drug1')
@@ -95,8 +91,6 @@ def queryBuilder(args):
             }}
             LIMIT {num_results}
         """
-        return query
-
     elif query_type == 'Pstud_cond':
         phase = args.get('phase')
         condition = args.get('condition3')
@@ -110,8 +104,6 @@ def queryBuilder(args):
             }}
             LIMIT {num_results}
         """
-        return query
-
     elif query_type == 'stud_drug':
         drug = args.get('drug2')
         num_results = args.get('num_res')
@@ -123,8 +115,6 @@ def queryBuilder(args):
             }}
             LIMIT {num_results}
         """
-        return query
-
     elif query_type == 'stud_cond':
         condition = args.get('condition4')
         num_results = args.get('num_res')
@@ -136,10 +126,14 @@ def queryBuilder(args):
             }}
             LIMIT {num_results}
         """
-        return query
-
     else:
         return None
+
+    # Log the generated query
+    logging.info(f"Generated SPARQL query: {query}")
+
+    return query
+
 
 if __name__ == '__main__':
     app.run(debug=True)
