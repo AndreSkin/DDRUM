@@ -57,77 +57,86 @@ def queryBuilder(args):
     """
 
     if query_type == 'Mdrug_cond':
-        condition = args.get('condition1')
+        condition = args.get('condition1').lower()
         num_results = args.get('num_res')
         query = f"""
             {prefix}
-            SELECT ?drugName ?drug (COUNT(?study) as ?studyCount)
+            SELECT ?drugName ?drug (COUNT(?drug) AS ?usageCount)
             WHERE {{
-                ?drug schema:study ?study ;
-                      schema:name ?drugName ;
-                      schema:usedFor mesh:{condition} .
+                ?study schema:MedicalCondition "{condition}" .
+                ?drug schema:study ?study .
+                ?drug schema:name ?drugName .
             }}
-            GROUP BY ?drug ?drugName
-            ORDER BY DESC(?studyCount)
+            GROUP BY ?drugName ?drug
+            ORDER BY DESC(?usageCount)
             LIMIT {num_results}
         """
     elif query_type == 'drug_cond':
-        condition = args.get('condition2')
+        condition = args.get('condition2').lower()
         num_results = args.get('num_res')
         query = f"""
             {prefix}
-            SELECT ?drugName ?drug
+            SELECT DISTINCT ?drugName ?drug
             WHERE {{
-                ?drug schema:usedToTreat mesh:{condition} ;
-                      schema:name ?drugName .
+                ?study schema:MedicalCondition "{condition}" .
+                ?drug schema:study ?study .
+                ?drug schema:name ?drugName .
             }}
             LIMIT {num_results}
         """
     elif query_type == 'Pstud_drug':
-        phase = args.get('phase')
-        drug = args.get('drug1')
+        phase = args.get('phase').lower()
+        drug = args.get('drug1').lower()
         num_results = args.get('num_res')
         query = f"""
             {prefix}
-            SELECT ?study
+            SELECT ?studyTitle ?study
             WHERE {{
-                ?study schema:citesDrug drug:{drug} ;
-                       schema:phase "{phase}" .
+                ?study schema:phase "{phase}" .
+                ?drug schema:name "{drug}" .
+                ?drug schema:study ?study .
+                ?study schema:title ?studyTitle .
             }}
             LIMIT {num_results}
         """
     elif query_type == 'Pstud_cond':
-        phase = args.get('phase')
-        condition = args.get('condition3')
+        phase = args.get('phase').lower()
+        condition = args.get('condition3').lower()
         num_results = args.get('num_res')
         query = f"""
             {prefix}
-            SELECT ?study
+            SELECT ?title ?study 
             WHERE {{
-                ?study schema:citesCondition mesh:{condition} ;
-                       schema:phase "{phase}" .
+            ?study a schema:MedicalStudy ;
+                    schema:phase "phase 1" ;
+                    schema:MedicalCondition "cancer" ;
+                    schema:title ?title .
             }}
             LIMIT {num_results}
         """
     elif query_type == 'stud_drug':
-        drug = args.get('drug2')
+        drug = args.get('drug2').lower()
         num_results = args.get('num_res')
         query = f"""
             {prefix}
-            SELECT ?study
+            SELECT DISTINCT ?studyTitle ?study
             WHERE {{
-                ?study schema:citesDrug drug:{drug} .
+                ?drug schema:name "{drug}" .
+                ?drug schema:study ?study .
+                ?study schema:title ?studyTitle .
             }}
             LIMIT {num_results}
         """
     elif query_type == 'stud_cond':
-        condition = args.get('condition4')
+        condition = args.get('condition4').lower()
         num_results = args.get('num_res')
         query = f"""
             {prefix}
-            SELECT ?study
+            SELECT ?title ?study 
             WHERE {{
-                ?study schema:citesCondition mesh:{condition} .
+                ?study a schema:MedicalStudy ;
+                        schema:MedicalCondition "{condition}" ;
+                        schema:title ?title .
             }}
             LIMIT {num_results}
         """
