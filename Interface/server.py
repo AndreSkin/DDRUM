@@ -15,15 +15,13 @@ def submit():
     try:
         # Extract data from the request
         data = request.form['input_data']
-        args = json.loads(data)  # Assuming data is a JSON string
+        args = json.loads(data)
 
-        # Call queryBuilder with the right arguments
         sparql_query = queryBuilder(args)
 
         # Define the endpoint URL
         endpoint = 'http://localhost:3030/DDRUM/query' 
 
-        # Prepare the payload
         payload = {'query': sparql_query}
 
         # Set the headers
@@ -32,7 +30,6 @@ def submit():
         # Make the POST request
         response = requests.post(endpoint, data=payload, headers=headers)
 
-        # Process the response as needed
         result = response.json() if response.status_code == 200 else {'error': 'Failed to get a valid response'}
 
         # Return JSON response
