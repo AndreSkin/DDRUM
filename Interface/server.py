@@ -16,8 +16,6 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
-
-
         # Extract data from the request
         data = request.data
         args = json.loads(data)
@@ -55,15 +53,15 @@ def queryBuilder(args):
         PREFIX drug: <https://drugcentral.org/drugcard/>
         PREFIX file: <https://clinicaltrials.gov/ct2/show/>
     """
+    object = args.get('object').lower()
+    num_results = args.get('num_res')
 
     if query_type == 'Mdrug_cond':
-        condition = args.get('condition1').lower()
-        num_results = args.get('num_res')
         query = f"""
             {prefix}
             SELECT ?drugName ?drug (COUNT(?drug) AS ?usageCount)
             WHERE {{
-                ?study schema:MedicalCondition "{condition}" .
+                ?study schema:MedicalCondition "{object}" .
                 ?drug schema:study ?study .
                 ?drug schema:name ?drugName .
             }}
@@ -72,13 +70,11 @@ def queryBuilder(args):
             LIMIT {num_results}
         """
     elif query_type == 'drug_cond':
-        condition = args.get('condition2').lower()
-        num_results = args.get('num_res')
         query = f"""
             {prefix}
             SELECT DISTINCT ?drugName ?drug
             WHERE {{
-                ?study schema:MedicalCondition "{condition}" .
+                ?study schema:MedicalCondition "{object}" .
                 ?drug schema:study ?study .
                 ?drug schema:name ?drugName .
             }}
@@ -86,14 +82,12 @@ def queryBuilder(args):
         """
     elif query_type == 'Pstud_drug':
         phase = args.get('phase').lower()
-        drug = args.get('drug1').lower()
-        num_results = args.get('num_res')
         query = f"""
             {prefix}
             SELECT ?studyTitle ?study
             WHERE {{
                 ?study schema:phase "{phase}" .
-                ?drug schema:name "{drug}" .
+                ?drug schema:name "{object}" .
                 ?drug schema:study ?study .
                 ?study schema:title ?studyTitle .
             }}
@@ -101,41 +95,35 @@ def queryBuilder(args):
         """
     elif query_type == 'Pstud_cond':
         phase = args.get('phase').lower()
-        condition = args.get('condition3').lower()
-        num_results = args.get('num_res')
         query = f"""
             {prefix}
             SELECT ?title ?study 
             WHERE {{
             ?study a schema:MedicalStudy ;
                     schema:phase "phase 1" ;
-                    schema:MedicalCondition "cancer" ;
+                    schema:MedicalCondition "{object}" ;
                     schema:title ?title .
             }}
             LIMIT {num_results}
         """
     elif query_type == 'stud_drug':
-        drug = args.get('drug2').lower()
-        num_results = args.get('num_res')
         query = f"""
             {prefix}
             SELECT DISTINCT ?studyTitle ?study
             WHERE {{
-                ?drug schema:name "{drug}" .
+                ?drug schema:name "{object}" .
                 ?drug schema:study ?study .
                 ?study schema:title ?studyTitle .
             }}
             LIMIT {num_results}
         """
     elif query_type == 'stud_cond':
-        condition = args.get('condition4').lower()
-        num_results = args.get('num_res')
         query = f"""
             {prefix}
             SELECT ?title ?study 
             WHERE {{
                 ?study a schema:MedicalStudy ;
-                        schema:MedicalCondition "{condition}" ;
+                        schema:MedicalCondition "{object}" ;
                         schema:title ?title .
             }}
             LIMIT {num_results}
@@ -144,7 +132,7 @@ def queryBuilder(args):
         return None
 
     # Log the generated query
-    logging.info(f"Generated SPARQL query: {query}")
+    # logging.info(f"Generated SPARQL query: {query}")
 
     return query
 

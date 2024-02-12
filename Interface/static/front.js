@@ -11,17 +11,15 @@ function submitForms() {
 
     // Iterate through form elements and collect data
     selectedForm.find(".form-group").each(function () {
-        var inputId = $(this).find('input, select').prop('id');
         var inputValue = $(this).find('input, select').val();
 
         // Check if the element is a select dropdown with a phaseDropdown ID
         if ($(this).find('select').hasClass('custom-select')) {
-            var phaseDropdownId = $(this).find('select').prop('id');
             var phaseDropdownValue = $(this).find('select').val();
             formData["phase"] = phaseDropdownValue;
         }
 
-        formData[inputId] = inputValue;
+        formData["object"] = inputValue;
     });
 
     // Add max results data
