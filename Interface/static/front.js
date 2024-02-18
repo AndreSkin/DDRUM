@@ -1,6 +1,8 @@
 function submitForms() {
     $("#results").empty();
+    $("#error").empty();
     var formData = {};
+    var isValid = true;
 
     // Get the selected form
     var selectedFormId = $("#dropdownMenu").val();
@@ -13,6 +15,11 @@ function submitForms() {
     // Iterate through form elements and collect data
     selectedForm.find(".form-group").each(function () {
         var inputValue = $(this).find('input, select').val();
+        if (!inputValue) {
+            $("#error").append("<br><p class='text-danger'>Please fill out all fields.</p>");
+            isValid = false;
+            return false;
+        }
 
         // Check if the element is a select dropdown with a phaseDropdown ID
         if ($(this).find('select').hasClass('custom-select')) {
@@ -23,11 +30,23 @@ function submitForms() {
         formData["object"] = inputValue;
     });
 
+    if (!isValid) {
+        return;
+    }
+
     // Add max results data
-    formData["num_res"] = $("#num_res").val();
+    let numres = $("#num_res").val();
+    if(numres<=0){
+        $("#error").append("<br><p class='text-danger'>Please enter a valid number of results (Min. 1).</p>");
+        return;
+    }
+    else
+    {
+        formData["num_res"] = numres;
+    }
 
     // Log the data in JSON format
-    console.log(JSON.stringify(formData));
+    //console.log(JSON.stringify(formData));
 
     // Send data as a POST request
     fetch('http://localhost:5000/submit', {
@@ -44,22 +63,35 @@ function submitForms() {
         return response.json();
     })
     .then(response => {
-        console.log('Response:', response);
-        var html = "<h2>Query Results</h2>";
+        //console.log('Response:', response);
+        var html = "<br>";
         if (response.head && response.results && response.results.bindings) {
+            html += "<table class='table table-striped table-vertical-lines'><thead><tr>";
+            var vars = response.head.vars;
+            vars.forEach(function(variable) {
+                html += "<th>" + variable + "</th>";
+            });
+            html += "</tr></thead><tbody>";
             var bindings = response.results.bindings;
             if (bindings.length > 0) {
-                html += "<ul>";
                 bindings.forEach(function(binding) {
-                    for (var key in binding) {
-                        if (binding.hasOwnProperty(key)) {
-                            html += "<li>" + key + ": " + binding[key].value + "</li>";
+                    html += "<tr>";
+                    vars.forEach(function(variable) {
+                        if (binding[variable]) {
+                            if (binding[variable].type === "uri") {
+                                html += "<td><a href='" + binding[variable].value + "' target='_blank'>" + binding[variable].value + "</a></td>";
+                            } else {
+                                html += "<td>" + binding[variable].value + "</td>";
+                            }
+                        } else {
+                            html += "<td></td>";
                         }
-                    }
+                    });
+                    html += "</tr>";
                 });
-                html += "</ul>";
+                html += "</tbody></table>";
             } else {
-                html += "<p>No results found.</p>";
+                html = "<br><p>No result found</p>";
             }
         } else {
             html += "<p>Unexpected response format.</p>";
