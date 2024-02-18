@@ -1,4 +1,5 @@
 function submitForms() {
+    $("#results").empty();
     var formData = {};
 
     // Get the selected form
@@ -42,9 +43,28 @@ function submitForms() {
         }
         return response.json();
     })
-    .then(data => {
-        console.log('Response:', data);
-        // Handle response as needed
+    .then(response => {
+        console.log('Response:', response);
+        var html = "<h2>Query Results</h2>";
+        if (response.head && response.results && response.results.bindings) {
+            var bindings = response.results.bindings;
+            if (bindings.length > 0) {
+                html += "<ul>";
+                bindings.forEach(function(binding) {
+                    for (var key in binding) {
+                        if (binding.hasOwnProperty(key)) {
+                            html += "<li>" + key + ": " + binding[key].value + "</li>";
+                        }
+                    }
+                });
+                html += "</ul>";
+            } else {
+                html += "<p>No results found.</p>";
+            }
+        } else {
+            html += "<p>Unexpected response format.</p>";
+        }
+        $("#results").append(html);
     })
     .catch(error => {
         console.error('There was a problem with your fetch operation:', error);

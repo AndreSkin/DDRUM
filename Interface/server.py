@@ -100,7 +100,7 @@ def queryBuilder(args):
             SELECT ?title ?study 
             WHERE {{
             ?study a schema:MedicalStudy ;
-                    schema:phase "phase 1" ;
+                    schema:phase "{phase}" ;
                     schema:MedicalCondition "{object}" ;
                     schema:title ?title .
             }}
