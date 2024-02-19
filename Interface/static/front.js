@@ -109,7 +109,7 @@ function submitForms() {
     // console.log(JSON.stringify(formData));
 
     // Send data as a POST request
-    fetch('http://localhost:5000/submit', {
+    fetch(server+'/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
