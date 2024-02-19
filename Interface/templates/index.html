@@ -6,38 +6,80 @@
     <title>DDRUM</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        #content {
+            overflow: scroll;
+            max-width: 99vw;
+            max-height: 99vh;
+        }
         .suggestion {
             cursor: pointer;
             padding: 8px;
         }
+    
         .scrollable-suggestions {
             max-height: 200px;
             overflow-y: auto;
             border: 1px solid #ced4da;
             border-radius: 0.25rem;
         }
-        /* Customizing scrollbar */
+    
+        /* Customizing scrollbars */
         .scrollable-suggestions::-webkit-scrollbar {
             width: 8px;
         }
+    
         .scrollable-suggestions::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
+    
         .scrollable-suggestions::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 4px;
         }
+    
         .scrollable-suggestions::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+    
         .suggestion:hover {
             background-color: #2064d4;
             color: white;
         }
+    
+        #results::-webkit-scrollbar {
+            width: 8px;
+        }
+    
+        #results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+    
+        #results::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+    
+        #results::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    
+        /* Responsive Styles
+        @media screen and (max-width: 768px) {
+            .scrollable-suggestions {
+                max-height: 150px;
+            }
+        }
+    
+        @media screen and (max-width: 576px) {
+            .scrollable-suggestions {
+                max-height: 100px;
+            }
+        } */
     </style>
+    
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100">
-    <div class="container">
+    <div class="container" id="content">
         <h1 class="text-center mb-4">DDRUM</h1>
 
         <div class="form-group">
@@ -85,7 +127,7 @@
         <!-- Global Submission Button -->
         <button type="button" class="btn btn-primary" onclick="submitForms()">Submit</button>
 
-        <div id="results"></div>
+        <div id="results" style="height:30vh;overflow:auto;" ></div>
 
         <div id="error"></div>
     </div>
