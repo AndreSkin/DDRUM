@@ -8,9 +8,82 @@ import json
 
 app = Flask(__name__)
 
+# Define the endpoint URL
+endpoint = 'http://localhost:3030/DDRUM/query' 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/drugs', methods=['GET'])
+def drugsNames():
+    try:
+
+        query = """
+            PREFIX schema: <https://schema.org/>
+            PREFIX mesh: <https://www.ncbi.nlm.nih.gov/mesh/?term=>
+            PREFIX drug: <https://drugcentral.org/drugcard/>
+            PREFIX file: <https://clinicaltrials.gov/ct2/show/>
+
+            SELECT ?drugName
+            WHERE {
+            ?drug a schema:Drug ;
+                    schema:name ?drugName .
+            }
+            """
+
+        payload = {'query': query}
+
+        # Set the headers
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        
+        # Make the POST request
+        response = requests.post(endpoint, data=payload, headers=headers)
+
+        result = response.json() if response.status_code == 200 else {'error': 'Failed to get a valid response'}
+
+        # Return JSON response
+        return jsonify(result)
+
+    except Exception as e:
+        # Log any exceptions
+        logging.error(f"An error occurred: {str(e)}")
+        return jsonify({'error': 'An error occurred'})
+    
+@app.route('/conditions', methods=['GET'])
+def conditionNames():
+    try:
+
+        query = """
+            PREFIX schema: <https://schema.org/>
+            PREFIX mesh: <https://www.ncbi.nlm.nih.gov/mesh/?term=>
+            PREFIX drug: <https://drugcentral.org/drugcard/>
+            PREFIX file: <https://clinicaltrials.gov/ct2/show/>
+
+            SELECT ?conditionName
+            WHERE {
+            ?study a schema:MedicalStudy ;
+                    schema:MedicalCondition ?conditionName .
+            }
+            """
+
+        payload = {'query': query}
+
+        # Set the headers
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        
+        # Make the POST request
+        response = requests.post(endpoint, data=payload, headers=headers)
+
+        result = response.json() if response.status_code == 200 else {'error': 'Failed to get a valid response'}
+
+        # Return JSON response
+        return jsonify(result)
+
+    except Exception as e:
+        # Log any exceptions
+        logging.error(f"An error occurred: {str(e)}")
+        return jsonify({'error': 'An error occurred'})
 
 
 @app.route('/submit', methods=['POST'])
@@ -21,9 +94,6 @@ def submit():
         args = json.loads(data)
 
         sparql_query = queryBuilder(args)
-
-        # Define the endpoint URL
-        endpoint = 'http://localhost:3030/DDRUM/query' 
 
         payload = {'query': sparql_query}
 
