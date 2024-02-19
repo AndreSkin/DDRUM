@@ -7,10 +7,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         #content {
-            overflow: scroll;
             max-width: 99vw;
             max-height: 99vh;
         }
+
+        .forms {
+            width: 70vw;
+            height: 70vh;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
         .suggestion {
             cursor: pointer;
             padding: 8px;
@@ -45,6 +52,11 @@
             background-color: #2064d4;
             color: white;
         }
+
+        #results {
+            height:30vh;
+            overflow:auto;
+        }
     
         #results::-webkit-scrollbar {
             width: 8px;
@@ -63,73 +75,82 @@
             background: #555;
         }
     
-        /* Responsive Styles
+        /* Responsive Styles */
         @media screen and (max-width: 768px) {
-            .scrollable-suggestions {
-                max-height: 150px;
+            .forms {
+                width: 95vw;
+                height: 95vh;
+                max-width: 99vw;
+                max-height: 99vh;
+            }
+            #results {
+                height:50vh;
+                overflow:auto;
             }
         }
-    
-        @media screen and (max-width: 576px) {
-            .scrollable-suggestions {
-                max-height: 100px;
-            }
-        } */
     </style>
     
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100">
     <div class="container" id="content">
-        <h1 class="text-center mb-4">DDRUM</h1>
 
-        <div class="form-group">
-            <label for="dropdownMenu">Select a Form:</label>
-            <select class="form-control" id="dropdownMenu">
-                <option value="1">Most used drugs to treat a condition</option>
-                <option value="2">Drugs used to treat given condition</option>
-                <option value="3">Studies (divided by phase) in which a drug is cited</option>
-                <option value="4">Studies (divided by phase) in which a condition is cited</option>
-                <option value="5">All studies citing a drug</option>
-                <option value="6">All studies citing a condition</option>
-            </select>
-        </div>
+        <div class="row justify-content-center">
+            
+            <div class="forms">
+                    
+                <h1 class="text-center mb-4">DDRUM</h1>
 
-        <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug">
-        <div id="drugSuggestions" class="scrollable-suggestions"></div>
-        
-        <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition">
-        <div id="conditionSuggestions" class="scrollable-suggestions"></div>
-
-        <!-- Dropdown for selecting phases -->
-        <div class="dropdown" id="phaseDropdownContainer" style="display: none;">
-            <div class="input-group">
-                <div class="input-group-append">
-                    <select class="custom-select" id="phaseDropdown_d1">
-                        <option value="Phase 1">Phase 1</option>
-                        <option value="Phase 2">Phase 2</option>
-                        <option value="Phase 3">Phase 3</option>
-                        <option value="Phase1/Phase2">Phase 1/Phase 2</option>
-                        <option value="Phase2/Phase3">Phase 2/Phase 3</option>
-                        <option value="Phase 4">Phase 4</option>
-                        <option value="Early Phase 1">Early Phase 1</option>
+                <div class="form-group">
+                    <label for="dropdownMenu">Select a Form:</label>
+                    <select class="form-control" id="dropdownMenu">
+                        <option value="1">Most used drugs to treat a condition</option>
+                        <option value="2">Drugs used to treat given condition</option>
+                        <option value="3">Studies (divided by phase) in which a drug is cited</option>
+                        <option value="4">Studies (divided by phase) in which a condition is cited</option>
+                        <option value="5">All studies citing a drug</option>
+                        <option value="6">All studies citing a condition</option>
                     </select>
                 </div>
+
+                <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug">
+                <div id="drugSuggestions" class="scrollable-suggestions"></div>
+                
+                <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition">
+                <div id="conditionSuggestions" class="scrollable-suggestions"></div>
+
+                <!-- Dropdown for selecting phases -->
+                <div class="dropdown" id="phaseDropdownContainer" style="display: none;">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <select class="custom-select" id="phaseDropdown_d1">
+                                <option value="Phase 1">Phase 1</option>
+                                <option value="Phase 2">Phase 2</option>
+                                <option value="Phase 3">Phase 3</option>
+                                <option value="Phase1/Phase2">Phase 1/Phase 2</option>
+                                <option value="Phase2/Phase3">Phase 2/Phase 3</option>
+                                <option value="Phase 4">Phase 4</option>
+                                <option value="Early Phase 1">Early Phase 1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="num_res" id="form_num">
+                    <div class="form-group">
+                        <label for="num_res">Maximum number of results to display:</label>
+                        <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1" required>
+                    </div>
+                </div>
+
+                <!-- Global Submission Button -->
+                <button type="button" class="btn btn-primary" onclick="submitForms()">Submit</button>
+
+                <div id="results" ></div>
+
+                <div id="error"></div>
             </div>
+                    
         </div>
-
-        <div class="num_res" id="form_num">
-            <div class="form-group">
-                <label for="num_res">Maximum number of results to display:</label>
-                <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1" required>
-            </div>
-        </div>
-
-        <!-- Global Submission Button -->
-        <button type="button" class="btn btn-primary" onclick="submitForms()">Submit</button>
-
-        <div id="results" style="height:30vh;overflow:auto;" ></div>
-
-        <div id="error"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
