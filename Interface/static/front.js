@@ -23,6 +23,7 @@ $(document).ready(function() {
         var userInput = $(this).val().toLowerCase();
         $('#drugSuggestions').html('');
         if (userInput.length >= 1) {
+            $(".scrollable-suggestions").css("border", "1px solid red");
             var suggestions = drugNames.filter(function(drug) {
                 return drug.toLowerCase().startsWith(userInput);
             });
@@ -37,6 +38,7 @@ $(document).ready(function() {
         var userInput = $(this).val().toLowerCase();
         $('#conditionSuggestions').html('');
         if (userInput.length >= 1) {
+            $(".scrollable-suggestions").css("border", "1px solid #ced4da");
             var suggestions = conditionNames.filter(function(condition) {
                 return condition.toLowerCase().startsWith(userInput);
             });
@@ -54,6 +56,7 @@ $(document).ready(function() {
 
     // Clicking on condition suggestion
     $('#conditionSuggestions').on('click', '.suggestion', function() {
+        $(".scrollable-suggestions").css("border", "none");
         $('#conditionSearch').val($(this).text());
         $('#conditionSuggestions').html('');
     });
@@ -74,6 +77,9 @@ $(document).ready(function() {
 });
 
 function submitForms() {
+    $(".scrollable-suggestions").css("border", "none");
+    $('#conditionSuggestions').html('');
+    $('#drugSuggestions').html('');
     $("#results").empty();
     $("#error").empty();
     var formData = {};
