@@ -1,3 +1,77 @@
+$(document).ready(function() {
+    // Arrays to store drug names and condition names
+    var drugNames = [];
+    var conditionNames = [];
+    
+    // Function to fetch drug names
+    $.getJSON('http://localhost:5000/drugs', function(data) {
+        $.each(data.results.bindings, function(index, value) {
+            drugNames.push(value.drugName.value);
+        });
+    });
+
+    // Function to fetch condition names
+    $.getJSON('http://localhost:5000/conditions', function(data) {
+        $.each(data.results.bindings, function(index, value) {
+            conditionNames.push(value.conditionName.value);
+        });
+    });
+
+    // Function to display drug suggestions
+    $('#drugSearch').on('input', function() {
+        var userInput = $(this).val().toLowerCase();
+        $('#drugSuggestions').html('');
+        if (userInput.length >= 1) {
+            var suggestions = drugNames.filter(function(drug) {
+                return drug.toLowerCase().startsWith(userInput);
+            });
+            $.each(suggestions, function(index, value) {
+                $('#drugSuggestions').append('<div class="suggestion">' + value + '</div>');
+            });
+        }
+    });
+
+    // Function to display condition suggestions
+    $('#conditionSearch').on('input', function() {
+        var userInput = $(this).val().toLowerCase();
+        $('#conditionSuggestions').html('');
+        if (userInput.length >= 1) {
+            var suggestions = conditionNames.filter(function(condition) {
+                return condition.toLowerCase().startsWith(userInput);
+            });
+            $.each(suggestions, function(index, value) {
+                $('#conditionSuggestions').append('<div class="suggestion">' + value + '</div>');
+            });
+        }
+    });
+
+    // Clicking on drug suggestion
+    $('#drugSuggestions').on('click', '.suggestion', function() {
+        $('#drugSearch').val($(this).text());
+        $('#drugSuggestions').html('');
+    });
+
+    // Clicking on condition suggestion
+    $('#conditionSuggestions').on('click', '.suggestion', function() {
+        $('#conditionSearch').val($(this).text());
+        $('#conditionSuggestions').html('');
+    });
+
+    // Mouse wheel scrolling for drug suggestions
+    $('#drugSuggestions').on('wheel', function(e) {
+        var delta = e.originalEvent.deltaY;
+        this.scrollTop += (delta > 0 ? 1 : -1) * 20;
+        e.preventDefault();
+    });
+
+    // Mouse wheel scrolling for condition suggestions
+    $('#conditionSuggestions').on('wheel', function(e) {
+        var delta = e.originalEvent.deltaY;
+        this.scrollTop += (delta > 0 ? 1 : -1) * 20;
+        e.preventDefault();
+    });
+});
+
 function submitForms() {
     $("#results").empty();
     $("#error").empty();

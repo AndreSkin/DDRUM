@@ -25,7 +25,7 @@ def drugsNames():
             PREFIX drug: <https://drugcentral.org/drugcard/>
             PREFIX file: <https://clinicaltrials.gov/ct2/show/>
 
-            SELECT ?drugName
+            SELECT DISTINCT ?drugName
             WHERE {
             ?drug a schema:Drug ;
                     schema:name ?drugName .
@@ -60,7 +60,7 @@ def conditionNames():
             PREFIX drug: <https://drugcentral.org/drugcard/>
             PREFIX file: <https://clinicaltrials.gov/ct2/show/>
 
-            SELECT ?conditionName
+            SELECT DISTINCT ?conditionName
             WHERE {
             ?study a schema:MedicalStudy ;
                     schema:MedicalCondition ?conditionName .

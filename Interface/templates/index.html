@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDRUM</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .suggestion {
+            cursor: pointer;
+        }
+        .suggestion-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100">
     <div class="container">
@@ -21,6 +30,12 @@
                 <option value="6">All studies citing a condition</option>
             </select>
         </div>
+
+        <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug">
+        <div id="drugSuggestions" class="suggestion-list"></div>
+
+        <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition">
+        <div id="conditionSuggestions" class="suggestion-list"></div>
 
         <!-- Form 1 -->
         <div class="form-container" id="form1" name="Mdrug_cond">
