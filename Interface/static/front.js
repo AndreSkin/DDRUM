@@ -1,17 +1,18 @@
+var server = "http://localhost:5000";
 $(document).ready(function() {
     // Arrays to store drug names and condition names
     var drugNames = [];
     var conditionNames = [];
     
     // Function to fetch drug names
-    $.getJSON('http://localhost:5000/drugs', function(data) {
+    $.getJSON(server+"/drugs", function(data) {
         $.each(data.results.bindings, function(index, value) {
             drugNames.push(value.drugName.value);
         });
     });
 
     // Function to fetch condition names
-    $.getJSON('http://localhost:5000/conditions', function(data) {
+    $.getJSON(server+'/conditions', function(data) {
         $.each(data.results.bindings, function(index, value) {
             conditionNames.push(value.conditionName.value);
         });
