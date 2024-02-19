@@ -79,48 +79,33 @@ function submitForms() {
     var isValid = true;
 
     // Get the selected form
-    var selectedFormId = $("#dropdownMenu").val();
-    var selectedForm = $("#form" + selectedFormId);
+    var selectedValue = $("#dropdownMenu").val();
+    let requests = ["","Mdrug_cond", "drug_cond", "Pstud_drug", "Pstud_cond", "stud_drug", "stud_cond"];
 
     // Determine the type_of_request
-    var typeOfRequest = selectedForm.attr('name');
-    formData["type_of_request"] = typeOfRequest;
+    formData["type_of_request"] = requests[parseInt(selectedValue)];
 
-    // Iterate through form elements and collect data
-    selectedForm.find(".form-group").each(function () {
-        var inputValue = $(this).find('input, select').val();
-        if (!inputValue) {
-            $("#error").append("<br><p class='text-danger'>Please fill out all fields.</p>");
-            isValid = false;
-            return false;
-        }
+    // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
+    if (selectedValue === "3" || selectedValue === "5") {
+        formData["object"] = $("#drugSearch").val();
+    } else {
+        formData["object"] = $("#conditionSearch").val();
+    }
 
-        // Check if the element is a select dropdown with a phaseDropdown ID
-        if ($(this).find('select').hasClass('custom-select')) {
-            var phaseDropdownValue = $(this).find('select').val();
-            formData["phase"] = phaseDropdownValue;
-        }
-
-        formData["object"] = inputValue;
-    });
-
-    if (!isValid) {
-        return;
+    // Check if the phase dropdown is visible and get its value
+    if ($("#phaseDropdownContainer").is(":visible")) {
+        formData["phase"] = $("#phaseDropdown_d1").val();
     }
 
     // Add max results data
     let numres = $("#num_res").val();
-    if(numres<=0){
+    if (numres <= 0) {
         $("#error").append("<br><p class='text-danger'>Please enter a valid number of results (Min. 1).</p>");
         return;
-    }
-    else
-    {
+    } else {
         formData["num_res"] = numres;
     }
-
-    // Log the data in JSON format
-    //console.log(JSON.stringify(formData));
+    // console.log(JSON.stringify(formData));
 
     // Send data as a POST request
     fetch('http://localhost:5000/submit', {
@@ -137,7 +122,6 @@ function submitForms() {
         return response.json();
     })
     .then(response => {
-        //console.log('Response:', response);
         var html = "<br>";
         if (response.head && response.results && response.results.bindings) {
             html += "<table class='table table-striped table-vertical-lines'><thead><tr>";
@@ -176,3 +160,4 @@ function submitForms() {
         console.error('There was a problem with your fetch operation:', error);
     });
 }
+

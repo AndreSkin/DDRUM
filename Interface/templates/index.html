@@ -54,84 +54,27 @@
         <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition">
         <div id="conditionSuggestions" class="scrollable-suggestions"></div>
 
-        <!-- Form 1 -->
-        <div class="form-container" id="form1" name="Mdrug_cond">
-            <div class="form-group">
-                <label for="condition1">Which drugs are the most used for</label>
-                <input type="text" class="form-control" id="condition1" placeholder="Enter Condition e.g. Cancer" required>
-            </div>
-        </div>
-
-        <!-- Form 2 -->
-        <div class="form-container" id="form2" name="drug_cond" style="display: none;">
-            <div class="form-group">
-                <label for="condition2">Which drugs are used to treat </label>
-                <input type="text" class="form-control" id="condition2" placeholder="Enter Condition e.g. Cancer" required>
-            </div>
-        </div>
-
-        <!-- Form 3 -->
-        <div class="form-container" id="form3" name="Pstud_drug" style="display: none;">
-            <div class="form-group">
-                <label for="drug1">Which are the studies (divided by phase) which cite</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="drug1" placeholder="Enter Drug name e.g. Paracetamol" required>
-                    <div class="input-group-append">
-                        <select class="custom-select" id="phaseDropdown_d1">
-                            <option value="Phase 1">Phase 1</option>
-                            <option value="Phase 2">Phase 2</option>
-                            <option value="Phase 3">Phase 3</option>
-                            <option value="Phase1/Phase2">Phase 1/Phase 2</option>
-                            <option value="Phase2/Phase3">Phase 2/Phase 3</option>
-                            <option value="Phase 4">Phase 4</option>
-                            <option value="Early Phase 1">Early Phase 1</option>
-                        </select>
-                    </div>
+        <!-- Dropdown for selecting phases -->
+        <div class="dropdown" id="phaseDropdownContainer" style="display: none;">
+            <div class="input-group">
+                <div class="input-group-append">
+                    <select class="custom-select" id="phaseDropdown_d1">
+                        <option value="Phase 1">Phase 1</option>
+                        <option value="Phase 2">Phase 2</option>
+                        <option value="Phase 3">Phase 3</option>
+                        <option value="Phase1/Phase2">Phase 1/Phase 2</option>
+                        <option value="Phase2/Phase3">Phase 2/Phase 3</option>
+                        <option value="Phase 4">Phase 4</option>
+                        <option value="Early Phase 1">Early Phase 1</option>
+                    </select>
                 </div>
-            </div>
-        </div>
-
-        <!-- Form 4 -->
-        <div class="form-container" id="form4" name="Pstud_cond" style="display: none;">
-            <div class="form-group" >
-                <label for="condition3">Which are the studies (divided by phase) which cite</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="condition3" placeholder="Enter Condition e.g. Cancer" required>
-                    <div class="input-group-append">
-                        <select class="custom-select" id="phaseDropdown_c1">
-                            <option value="Phase 1">Phase 1</option>
-                            <option value="Phase 2">Phase 2</option>
-                            <option value="Phase 3">Phase 3</option>
-                            <option value="Phase1/Phase2">Phase 1/Phase 2</option>
-                            <option value="Phase2/Phase3">Phase 2/Phase 3</option>
-                            <option value="Phase 4">Phase 4</option>
-                            <option value="E_Phase 1">Early Phase 1</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form 5 -->
-        <div class="form-container" id="form5" name="stud_drug" style="display: none;">
-            <div class="form-group">
-                <label for="drug2">All the studies which cite (drug)</label>
-                <input type="text" class="form-control" id="drug2" placeholder="Enter Drug name e.g. Paracetamol" required>
-            </div>
-        </div>
-
-        <!-- Form 6 -->
-        <div class="form-container" id="form6" name="stud_cond" style="display: none;">
-            <div class="form-group">
-                <label for="condition4">All the studies which cite (condition)</label>
-                <input type="text" class="form-control" id="condition4" placeholder="Enter Condition e.g. Cancer" required>
             </div>
         </div>
 
         <div class="num_res" id="form_num">
             <div class="form-group">
                 <label for="num_res">Maximum number of results to display:</label>
-                <input type="number" class="form-control" id="num_res" placeholder="Max results" min = "1" required>
+                <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1" required>
             </div>
         </div>
 
@@ -165,15 +108,30 @@
             function showSelectedForm() {
                 // Hide all forms
                 $(".form-container").hide();
+                $("#phaseDropdownContainer").hide(); // Hide the phase dropdown container by default
 
+                $("#drugSearch").val('');
+                $("#conditionSearch").val('');
                 // Get the selected value from the dropdown
                 var selectedValue = $("#dropdownMenu").val();
 
-                // Show the corresponding form
-                $("#form" + selectedValue).show();
+                 // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
+                if (selectedValue === "3" || selectedValue === "5") {
+                    $("#drugSearch").show();
+                    $("#conditionSearch").hide();
+                } else {
+                    $("#drugSearch").hide();
+                    $("#conditionSearch").show();
+                }
+                // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
+                if (selectedValue === "3" || selectedValue === "4") {
+                    $("#phaseDropdownContainer").show();
+                } else {
+                    $("#phaseDropdownContainer").hide();
+;
+                }
             }
         });
     </script>
-    
 </body>
 </html>
