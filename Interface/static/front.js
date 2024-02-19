@@ -25,13 +25,16 @@ $(document).ready(function() {
         var userInput = $(this).val().toLowerCase();
         $('#drugSuggestions').html('');
         if (userInput.length >= 1) {
-            $(".scrollable-suggestions").css("border", "1px solid red");
+            $(".scrollable-suggestions").css("border", "1px solid #ced4da");
             var suggestions = drugNames.filter(function(drug) {
                 return drug.toLowerCase().startsWith(userInput);
             });
             $.each(suggestions, function(index, value) {
                 $('#drugSuggestions').append('<div class="suggestion">' + value + '</div>');
             });
+        }
+        else {
+            $(".scrollable-suggestions").css("border", "none");
         }
     });
 
@@ -47,6 +50,9 @@ $(document).ready(function() {
             $.each(suggestions, function(index, value) {
                 $('#conditionSuggestions').append('<div class="suggestion">' + value + '</div>');
             });
+        }
+        else {
+            $(".scrollable-suggestions").css("border", "none");
         }
     });
 
