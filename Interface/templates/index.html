@@ -8,10 +8,27 @@
     <style>
         .suggestion {
             cursor: pointer;
+            padding: 8px;
         }
-        .suggestion-list {
+        .scrollable-suggestions {
             max-height: 200px;
             overflow-y: auto;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+        /* Customizing scrollbar */
+        .scrollable-suggestions::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-suggestions::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .scrollable-suggestions::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .scrollable-suggestions::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 </head>
@@ -32,10 +49,10 @@
         </div>
 
         <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug">
-        <div id="drugSuggestions" class="suggestion-list"></div>
-
+        <div id="drugSuggestions" class="scrollable-suggestions"></div>
+        
         <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition">
-        <div id="conditionSuggestions" class="suggestion-list"></div>
+        <div id="conditionSuggestions" class="scrollable-suggestions"></div>
 
         <!-- Form 1 -->
         <div class="form-container" id="form1" name="Mdrug_cond">
