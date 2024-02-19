@@ -7,14 +7,16 @@ $(document).ready(function() {
     // Function to fetch drug names
     $.getJSON(server+"/drugs", function(data) {
         $.each(data.results.bindings, function(index, value) {
-            drugNames.push(value.drugName.value);
+            let drugName = value.drugName.value.charAt(0).toUpperCase() + value.drugName.value.slice(1); 
+            drugNames.push(drugName);
         });
     });
 
     // Function to fetch condition names
     $.getJSON(server+'/conditions', function(data) {
         $.each(data.results.bindings, function(index, value) {
-            conditionNames.push(value.conditionName.value);
+            let conditionName = value.conditionName.value.charAt(0).toUpperCase() + value.conditionName.value.slice(1); 
+            conditionNames.push(conditionName);
         });
     });
 
@@ -134,7 +136,7 @@ function submitForms() {
             html += "<table class='table table-striped table-vertical-lines'><thead><tr>";
             var vars = response.head.vars;
             vars.forEach(function(variable) {
-                html += `<th>` + variable + "</th>";
+                html += `<th>` + variable.charAt(0).toUpperCase() + variable.slice(1) + "</th>";
             });
             html += "</tr></thead><tbody>";
             var bindings = response.results.bindings;
@@ -146,7 +148,8 @@ function submitForms() {
                             if (binding[variable].type === "uri") {
                                 html += "<td><a href='" + binding[variable].value + "' target='_blank'>" + binding[variable].value + "</a></td>";
                             } else {
-                                html += "<td>" + binding[variable].value + "</td>";
+                                let result = binding[variable].value
+                                html += "<td>" + result.charAt(0).toUpperCase() + result.slice(1) + "</td>";
                             }
                         } else {
                             html += "<td></td>";
