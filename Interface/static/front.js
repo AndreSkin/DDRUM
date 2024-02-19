@@ -128,7 +128,7 @@ function submitForms() {
             html += "<table class='table table-striped table-vertical-lines'><thead><tr>";
             var vars = response.head.vars;
             vars.forEach(function(variable) {
-                html += "<th>" + variable + "</th>";
+                html += `<th class="var">` + variable + "</th>";
             });
             html += "</tr></thead><tbody>";
             var bindings = response.results.bindings;
@@ -161,4 +161,12 @@ function submitForms() {
         console.error('There was a problem with your fetch operation:', error);
     });
 }
-
+$(document).ready(function() {
+  $(".var").hover(function() {
+    $(this).css("background-color", "blue");
+    $(this).css("color", "white");
+  }, function() {
+    $(this).css("background-color", "");
+    $(this).css("color", "");
+  });
+});
