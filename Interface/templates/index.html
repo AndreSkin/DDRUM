@@ -208,6 +208,9 @@
 
             // Function to show the corresponding form based on the selected dropdown value
             function showSelectedForm() {
+                $(".scrollable-suggestions").css("border", "none");
+                $('#conditionSuggestions').html('');
+                $('#drugSuggestions').html('');
                 // Hide all forms
                 $(".form-container").hide();
                 $("#phaseDropdownContainer").hide(); // Hide the phase dropdown container by default
