@@ -22,10 +22,12 @@ endpoint = os.getenv('ENDPOINT')
 def index():
     return render_template('index.html')
 
+import logging
+from flask import jsonify
+
 @app.route('/drugs', methods=['GET'])
 def drugsNames():
     try:
-
         query = """
             PREFIX schema: <https://schema.org/>
             PREFIX mesh: <https://www.ncbi.nlm.nih.gov/mesh/?term=>
@@ -47,15 +49,17 @@ def drugsNames():
         # Make the POST request
         response = requests.post(endpoint, data=payload, headers=headers)
 
-        result = response.json() if response.status_code == 200 else {'error': 'Failed to get a valid response'}
-
-        # Return JSON response
-        return jsonify(result)
+        if response.status_code == 200:
+            result = response.json()
+            # Return JSON response
+            return jsonify(result)
+        else:
+            return jsonify({'error': 'Failed to get a valid response'}), 500
 
     except Exception as e:
         # Log any exceptions
         logging.error(f"An error occurred: {str(e)}")
-        return jsonify({'error': 'An error occurred'})
+        return jsonify({'error': 'An error occurred'}), 500
     
 @app.route('/conditions', methods=['GET'])
 def conditionNames():
@@ -82,15 +86,18 @@ def conditionNames():
         # Make the POST request
         response = requests.post(endpoint, data=payload, headers=headers)
 
-        result = response.json() if response.status_code == 200 else {'error': 'Failed to get a valid response'}
-
-        # Return JSON response
-        return jsonify(result)
+        if response.status_code == 200:
+            result = response.json()
+            # Return JSON response
+            return jsonify(result)
+        else:
+            return jsonify({'error': 'Failed to get a valid response'}), 500
 
     except Exception as e:
         # Log any exceptions
         logging.error(f"An error occurred: {str(e)}")
-        return jsonify({'error': 'An error occurred'})
+        return jsonify({'error': 'An error occurred'}), 500
+
 
 
 @app.route('/submit', methods=['POST'])
