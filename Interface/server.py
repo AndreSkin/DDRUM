@@ -5,11 +5,18 @@ import logging
 from flask import Flask, render_template, request, jsonify
 import requests
 import json
+import os
+from dotenv import load_dotenv
+
+# Carica le variabili di ambiente dal file .env
+dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
 
 app = Flask(__name__)
 
-# Define the endpoint URL
-endpoint = 'http://localhost:3030/DDRUM/query' 
+# Leggi l'endpoint dall'ambiente
+endpoint = os.getenv('ENDPOINT') 
 
 @app.route('/')
 def index():
