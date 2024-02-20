@@ -85,10 +85,22 @@
         #results::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-        #error {
-            color: red;
-            min-height: 1vh;
-        }
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+                    .forms {
+                        width: 95vw;
+                        height: 95vh;
+                        max-width: 99vw;
+                        max-height: 99vh;
+                    }
+                    #results {
+                        height:50vh;
+                        overflow:auto;
+                    }
+                #error {
+                    min-height: 1vh;
+                }
+            }
     </style>
     
 </head>
