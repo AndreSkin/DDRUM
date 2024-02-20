@@ -1,17 +1,16 @@
 var server = "http://localhost:5000";
-
 class TrieNode {
     constructor() {
-        this.children = {};
-        this.isEndOfWord = false;
+        this.children = {}; // Map of child nodes indexed by characters
+        this.isEndOfWord = false; // Flag to indicate if it's the end of a word
     }
 }
-
 class Trie {
     constructor() {
-        this.root = new TrieNode();
+        this.root = new TrieNode(); // Root node of the trie
     }
 
+    // Inserts a word into the trie
     insert(word) {
         let node = this.root;
         for (let char of word) {
@@ -23,6 +22,7 @@ class Trie {
         node.isEndOfWord = true;
     }
 
+    // Searches for a word in the trie
     search(word) {
         let node = this.root;
         for (let char of word) {
@@ -34,6 +34,7 @@ class Trie {
         return node != null && node.isEndOfWord;
     }
 
+    // Retrieves all words with a given prefix from the trie
     getWordsWithPrefix(prefix) {
         let node = this.root;
         for (let char of prefix) {
@@ -45,6 +46,7 @@ class Trie {
         return this._getAllWordsFromNode(node, prefix);
     }
 
+    // Helper function to recursively retrieve all words from a node
     _getAllWordsFromNode(node, prefix) {
         let words = [];
         if (node.isEndOfWord) {
@@ -64,19 +66,27 @@ $(document).ready(function() {
     var conditionTrie = new Trie();
     
     // Function to fetch drug names and populate the trie
-    $.getJSON(server+"/drugs", function(data) {
+    $.getJSON(server+"/drugs")
+    .done(function(data) {
         $.each(data.results.bindings, function(index, value) {
             let drugName = value.drugName.value.charAt(0).toUpperCase() + value.drugName.value.slice(1); 
             drugTrie.insert(drugName.toLowerCase());
         });
+    })
+    .fail(function() {
+        $('#error').text("Could not fetch from server");
     });
 
     // Function to fetch condition names and populate the trie
-    $.getJSON(server+'/conditions', function(data) {
+    $.getJSON(server+'/conditions')
+    .done(function(data) {
         $.each(data.results.bindings, function(index, value) {
             let conditionName = value.conditionName.value.charAt(0).toUpperCase() + value.conditionName.value.slice(1); 
             conditionTrie.insert(conditionName.toLowerCase());
         });
+    })
+    .fail(function() {
+        $('#error').text("Could not fetch from server");
     });
 
     // Function to display suggestions

@@ -11,8 +11,8 @@
     <style>
         /* Add your custom styles here */
         #content {
-            max-width: 99vw;
-            max-height: 99vh;
+            min-height: calc(100vh - 80px); /* Subtracting the height of the footer */
+            position: relative;
         }
 
         .forms {
@@ -65,7 +65,7 @@
         }
 
         #results {
-            height:30vh;
+            max-height:30vh;
             overflow:auto;
         }
     
@@ -85,24 +85,13 @@
         #results::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-    
-        /* Responsive Styles */
-        @media screen and (max-width: 768px) {
-            .forms {
-                width: 95vw;
-                height: 95vh;
-                max-width: 99vw;
-                max-height: 99vh;
-            }
-            #results {
-                height:40vh;
-                overflow:auto;
-            }
+        #error {
+            min-height: 1vh;
         }
     </style>
     
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100">
+<body class="d-flex flex-column justify-content-between">
     <div class="container" id="content">
 
         <div class="row justify-content-center">
@@ -165,28 +154,26 @@
                     
         </div>
 
-        <!-- Footer -->
-        <footer class="footer mt-auto py-3 bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <p class="text-muted mb-0">Author: <a href="https://github.com/stintipacchio" target="_blank">Andrea Loretti</a></p>
-                    </div>
-                    <div class="col  text-right">
-                        <p class="text-muted mb-0">License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p class="text-muted mb-0">Author: <a href="https://github.com/andreskin" target="_blank">Andrea Schinoppi</a></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
     </div>
 
-
+    <!-- Footer -->
+    <footer class="footer py-3 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text-muted mb-0">Author: <a href="https://github.com/stintipacchio" target="_blank">Andrea Loretti</a></p>
+                </div>
+                <div class="col  text-right">
+                    <p class="text-muted mb-0">License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-muted mb-0">Author: <a href="https://github.com/andreskin" target="_blank">Andrea Schinoppi</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
