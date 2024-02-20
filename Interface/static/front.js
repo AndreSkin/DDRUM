@@ -85,6 +85,7 @@ $(document).ready(function() {
         if (input.length >= 1) {
             $(".scrollable-suggestions").css("border", "1px solid #ced4da");
             var suggestions = trie.getWordsWithPrefix(input.toLowerCase());
+            suggestions.sort(); // Sort the suggestions alphabetically
             $.each(suggestions, function(index, value) {
                 suggestionsContainer.append('<div class="suggestion">' + value + '</div>');
             });
@@ -93,6 +94,7 @@ $(document).ready(function() {
             $(".scrollable-suggestions").css("border", "none");
         }
     }
+    
 
     // Function to handle input for drug search
     $('#drugSearch').on('input', function() {
@@ -119,19 +121,6 @@ $(document).ready(function() {
         $('#conditionSuggestions').html('');
     });
 
-    // Mouse wheel scrolling for drug suggestions
-    $('#drugSuggestions').on('wheel', function(e) {
-        var delta = e.originalEvent.deltaY;
-        this.scrollTop += (delta > 0 ? 1 : -1) * 20;
-        e.preventDefault();
-    });
-
-    // Mouse wheel scrolling for condition suggestions
-    $('#conditionSuggestions').on('wheel', function(e) {
-        var delta = e.originalEvent.deltaY;
-        this.scrollTop += (delta > 0 ? 1 : -1) * 20;
-        e.preventDefault();
-    });
 });
 
 
