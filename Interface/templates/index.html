@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="DDRUM project website">
+    <meta name="keywords" content="DDRUM, Drug, Disease, Research, RDF, condition, MeSh">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDRUM</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        /* Add your custom styles here */
         #content {
             max-width: 99vw;
             max-height: 99vh;
@@ -28,6 +31,10 @@
             max-height: 200px;
             overflow-y: auto;
             border-radius: 0.25rem;
+        }
+
+        #submitbtn {
+            background-color: #2064d4;
         }
     
         /* Customizing scrollbars */
@@ -102,7 +109,7 @@
 
                 <div class="form-group">
                     <label for="dropdownMenu">Select a Form:</label>
-                    <select class="form-control" id="dropdownMenu">
+                    <select class="form-control" id="dropdownMenu" aria-label="Select a Form">
                         <option value="1">Most used drugs to treat a condition</option>
                         <option value="2">Drugs used to treat given condition</option>
                         <option value="3">Studies (divided by phase) in which a drug is cited</option>
@@ -112,17 +119,17 @@
                     </select>
                 </div>
 
-                <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug">
-                <div id="drugSuggestions" class="scrollable-suggestions"></div>
+                <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug" aria-label="Search for a drug">
+                <div id="drugSuggestions" class="scrollable-suggestions" role="listbox" aria-labelledby="drugSearch"></div>
                 
-                <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition">
-                <div id="conditionSuggestions" class="scrollable-suggestions"></div>
+                <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition" aria-label="Search for a condition">
+                <div id="conditionSuggestions" class="scrollable-suggestions" role="listbox" aria-labelledby="conditionSearch"></div>
 
                 <!-- Dropdown for selecting phases -->
                 <div class="dropdown" id="phaseDropdownContainer" style="display: none;">
                     <div class="input-group">
                         <div class="input-group-append">
-                            <select class="custom-select" id="phaseDropdown_d1">
+                            <select class="custom-select" id="phaseDropdown_d1" aria-label="Select Phase">
                                 <option value="Phase 1">Phase 1</option>
                                 <option value="Phase 2">Phase 2</option>
                                 <option value="Phase 3">Phase 3</option>
@@ -140,14 +147,14 @@
                 <div class="num_res" id="form_num">
                     <div class="form-group">
                         <label for="num_res">Maximum number of results to display:</label>
-                        <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1" required>
+                        <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1" required aria-label="Maximum number of results">
                     </div>
                 </div>
 
                 <!-- Global Submission Button -->
-                <button type="button" class="btn btn-primary" onclick="submitForms()">Submit</button>
+                <button type="button" class="btn btn-primary" id="submitbtn" onclick="submitForms()">Submit</button>
 
-                <div id="results" ></div>
+                <div id="results" aria-live="polite" aria-atomic="true"></div>
 
                 <div id="error"></div>
             </div>
