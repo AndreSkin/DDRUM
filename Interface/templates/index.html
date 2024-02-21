@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="DDRUM project website">
@@ -9,10 +10,21 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Add your custom styles here */
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         #content {
-            min-height: calc(100vh - 80px); /* Subtracting the height of the footer */
-            position: relative;
+            max-width: 99vw;
+            max-height: 99vh;
         }
 
         .forms {
@@ -26,7 +38,7 @@
             cursor: pointer;
             padding: 8px;
         }
-    
+
         .scrollable-suggestions {
             max-height: 200px;
             overflow-y: auto;
@@ -36,25 +48,25 @@
         #submitbtn {
             background-color: #2064d4;
         }
-    
+
         /* Customizing scrollbars */
         .scrollable-suggestions::-webkit-scrollbar {
             width: 8px;
         }
-    
+
         .scrollable-suggestions::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-    
+
         .scrollable-suggestions::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 4px;
         }
-    
+
         .scrollable-suggestions::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-    
+
         .suggestion:hover {
             background-color: #2064d4;
             color: white;
@@ -65,53 +77,72 @@
         }
 
         #results {
-            max-height:30vh;
-            overflow:auto;
+            max-height: 50vh;
+            overflow: auto;
         }
-    
+
         #results::-webkit-scrollbar {
             width: 8px;
         }
-    
+
         #results::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-    
+
         #results::-webkit-scrollbar-thumb {
             background: #888;
             border-radius: 4px;
         }
-    
+
         #results::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+
         /* Responsive Styles */
         @media screen and (max-width: 768px) {
-                    .forms {
-                        width: 95vw;
-                        height: 95vh;
-                        max-width: 99vw;
-                        max-height: 99vh;
-                    }
-                    #results {
-                        height:50vh;
-                        overflow:auto;
-                    }
-                #error {
-                    min-height: 1vh;
-                }
+            .forms {
+                width: 95vw;
+                height: 95vh;
+                max-width: 99vw;
+                max-height: 99vh;
             }
+
+            #results {
+                height: 50vh;
+                overflow: auto;
+            }
+
+            #error {
+                min-height: 1vh;
+            }
+        }
     </style>
-    
+
 </head>
+
 <body class="d-flex flex-column justify-content-between">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div>
+                <h1 class="mb-0">DDRUM</h1>
+            </div>
+            <div>
+                <p class="text-muted mb-0">Author: <a href="https://github.com/stintipacchio" target="_blank">Andrea Loretti</a></p>
+                <p class="text-muted mb-0">Author: <a href="https://github.com/andreskin" target="_blank">Andrea Schinoppi</a></p>
+                <p class="text-muted mb-0">License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></p>
+            </div>
+        </div>
+    </header>
+
     <div class="container" id="content">
 
         <div class="row justify-content-center">
-            
+
             <div class="forms">
-                    
-                <h1 class="text-center mb-4">DDRUM</h1>
+
+                <br>
 
                 <div class="form-group">
                     <label for="dropdownMenu">Select a Form:</label>
@@ -125,11 +156,15 @@
                     </select>
                 </div>
 
-                <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug" aria-label="Search for a drug">
-                <div id="drugSuggestions" class="scrollable-suggestions" role="listbox" aria-labelledby="drugSearch"></div>
-                
-                <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition" aria-label="Search for a condition">
-                <div id="conditionSuggestions" class="scrollable-suggestions" role="listbox" aria-labelledby="conditionSearch"></div>
+                <input type="text" id="drugSearch" class="form-control mb-2" placeholder="Search for a drug"
+                    aria-label="Search for a drug">
+                <div id="drugSuggestions" class="scrollable-suggestions" role="listbox"
+                    aria-labelledby="drugSearch"></div>
+
+                <input type="text" id="conditionSearch" class="form-control mb-2" placeholder="Search for a condition"
+                    aria-label="Search for a condition">
+                <div id="conditionSuggestions" class="scrollable-suggestions" role="listbox"
+                    aria-labelledby="conditionSearch"></div>
 
                 <!-- Dropdown for selecting phases -->
                 <div class="dropdown" id="phaseDropdownContainer" style="display: none;">
@@ -153,7 +188,8 @@
                 <div class="num_res" id="form_num">
                     <div class="form-group">
                         <label for="num_res">Maximum number of results to display:</label>
-                        <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1" required aria-label="Maximum number of results">
+                        <input type="number" class="form-control" id="num_res" placeholder="Max results" min="1"
+                            required aria-label="Maximum number of results">
                     </div>
                 </div>
 
@@ -164,36 +200,17 @@
 
                 <div id="error"></div>
             </div>
-                    
+
         </div>
 
     </div>
-
-    <!-- Footer -->
-    <footer class="footer py-3 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="text-muted mb-0">Author: <a href="https://github.com/stintipacchio" target="_blank">Andrea Loretti</a></p>
-                </div>
-                <div class="col  text-right">
-                    <p class="text-muted mb-0">License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p class="text-muted mb-0">Author: <a href="https://github.com/andreskin" target="_blank">Andrea Schinoppi</a></p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='front.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Set the default value for the dropdown
             $("#dropdownMenu").val("1");
             $("#num_res").val("10");
@@ -202,7 +219,7 @@
             showSelectedForm();
 
             // Attach an event listener to the dropdown to show the corresponding form on change
-            $("#dropdownMenu").change(function() {
+            $("#dropdownMenu").change(function () {
                 showSelectedForm();
             });
 
@@ -220,7 +237,7 @@
                 // Get the selected value from the dropdown
                 var selectedValue = $("#dropdownMenu").val();
 
-                 // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
+                // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
                 if (selectedValue === "3" || selectedValue === "5") {
                     $("#drugSearch").show();
                     $("#conditionSearch").hide();
@@ -238,4 +255,5 @@
         });
     </script>
 </body>
+
 </html>
