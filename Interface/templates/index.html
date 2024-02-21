@@ -131,7 +131,7 @@
                 // Get the selected value from the dropdown
                 var selectedValue = $("#dropdownMenu").val();
 
-                // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
+                // Toggle visibility of drugSearch and conditionSearch
                 if (selectedValue === "Pstud_drug" || selectedValue === "stud_drug") {
                     $("#drugSearch").show();
                     $("#conditionSearch").hide();
@@ -139,7 +139,7 @@
                     $("#drugSearch").hide();
                     $("#conditionSearch").show();
                 }
-                // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
+                // Toggle visibility of phases
                 if (selectedValue === "Pstud_drug" || selectedValue === "Pstud_cond") {
                     $("#phaseDropdownContainer").show();
                 } else {
