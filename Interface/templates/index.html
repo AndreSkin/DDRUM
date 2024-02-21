@@ -41,12 +41,12 @@
                 <div class="form-group">
                     <label for="dropdownMenu">Select a Form:</label>
                     <select class="form-control" id="dropdownMenu" aria-label="Select a Form">
-                        <option value="1">Most used drugs to treat a condition</option>
-                        <option value="2">Drugs used to treat given condition</option>
-                        <option value="3">Studies (divided by phase) in which a drug is cited</option>
-                        <option value="4">Studies (divided by phase) in which a condition is cited</option>
-                        <option value="5">All studies citing a drug</option>
-                        <option value="6">All studies citing a condition</option>
+                        <option value="Mdrug_cond">Most used drugs to treat a condition</option>
+                        <option value="drug_cond">Drugs used to treat given condition</option>
+                        <option value="Pstud_drug">Studies (divided by phase) in which a drug is cited</option>
+                        <option value="Pstud_cond">Studies (divided by phase) in which a condition is cited</option>
+                        <option value="stud_drug">All studies citing a drug</option>
+                        <option value="stud_cond">All studies citing a condition</option>
                     </select>
                 </div>
 
@@ -106,7 +106,7 @@
     <script>
         $(document).ready(function () {
             // Set the default value for the dropdown
-            $("#dropdownMenu").val("1");
+            $("#dropdownMenu").val("Mdrug_cond");
             $("#num_res").val("10");
 
             // Call the function to show the corresponding form on page load
@@ -132,7 +132,7 @@
                 var selectedValue = $("#dropdownMenu").val();
 
                 // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
-                if (selectedValue === "3" || selectedValue === "5") {
+                if (selectedValue === "Pstud_drug" || selectedValue === "stud_drug") {
                     $("#drugSearch").show();
                     $("#conditionSearch").hide();
                 } else {
@@ -140,7 +140,7 @@
                     $("#conditionSearch").show();
                 }
                 // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
-                if (selectedValue === "3" || selectedValue === "4") {
+                if (selectedValue === "Pstud_drug" || selectedValue === "Pstud_cond") {
                     $("#phaseDropdownContainer").show();
                 } else {
                     $("#phaseDropdownContainer").hide();

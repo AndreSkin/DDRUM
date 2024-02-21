@@ -144,13 +144,11 @@ function submitForms() {
 
     // Get the selected form
     var selectedValue = $("#dropdownMenu").val();
-    let requests = ["","Mdrug_cond", "drug_cond", "Pstud_drug", "Pstud_cond", "stud_drug", "stud_cond"];
 
     // Determine the type_of_request
-    formData["type_of_request"] = requests[parseInt(selectedValue)];
+    formData["type_of_request"] = selectedValue;
 
-    // Toggle visibility of drugSearch and conditionSearch inputs based on selected value
-    if (selectedValue === "3" || selectedValue === "5") {
+    if (selectedValue === "Pstud_drug" || selectedValue === "stud_drug") {
         formData["object"] = $("#drugSearch").val();
     } else {
         formData["object"] = $("#conditionSearch").val();
