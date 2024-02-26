@@ -1,4 +1,7 @@
+flask
+requests
+json
+python-dotenv
 pandas
 rdflib
-python-dotenv
-
+pydot
