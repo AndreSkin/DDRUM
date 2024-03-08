@@ -3,6 +3,7 @@ import logging
     # app.logger.error('testing error log')
     # app.logger.info('testing info log')
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import requests
 import json
 import os
@@ -14,6 +15,7 @@ if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
 app = Flask(__name__)
+CORS(app)
 
 # Leggi l'endpoint dall'ambiente
 endpoint = os.getenv('ENDPOINT') 
